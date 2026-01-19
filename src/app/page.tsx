@@ -187,7 +187,7 @@ export default function Home() {
               <span className="text-slate-500">with 4.9 rating</span>
             </div>
             <div className="space-y-4">
-              <h1 className="text-4xl font-semibold leading-tight text-slate-900 sm:text-5xl">
+              <h1 className="text-4xl font-semibold leading-tight text-[#4D1895] sm:text-5xl">
                 Meet HabitPal
               </h1>
               <p className="text-3xl font-semibold leading-snug text-slate-900 sm:text-4xl">
