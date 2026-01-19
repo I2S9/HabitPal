@@ -7,22 +7,25 @@ export default function Home() {
   const testimonialColumns = [
     [
       {
-        name: "Emily Rogers",
-        initials: "ER",
-        result: "Built a daily routine in 8 weeks",
-        quote:
-          "HabitPal helped me stick to my morning routine and stay consistent without stress.",
-      },
-      {
         name: "David Chen",
         initials: "DC",
+        accent: "light",
         result: "Completed 4 goals this quarter",
         quote:
           "The planning flow is simple and keeps me focused on the habits that matter.",
       },
       {
+        name: "Emily Rogers",
+        initials: "ER",
+        accent: "dark",
+        result: "Built a daily routine in 8 weeks",
+        quote:
+          "HabitPal helped me stick to my morning routine and stay consistent without stress.",
+      },
+      {
         name: "Sophia Martin",
         initials: "SM",
+        accent: "lighter",
         result: "Tracked 120 days in a row",
         quote:
           "Seeing my streaks grow every day keeps me motivated and proud of my progress.",
@@ -30,22 +33,25 @@ export default function Home() {
     ],
     [
       {
-        name: "Amira Hassan",
-        initials: "AH",
-        result: "Balanced work and wellness",
-        quote:
-          "The daily planner makes my priorities clear and keeps my energy steady.",
-      },
-      {
         name: "Noah Patel",
         initials: "NP",
+        accent: "dark",
         result: "Reached a long-term fitness goal",
         quote:
           "Small check-ins and progress charts make long goals feel achievable.",
       },
       {
+        name: "Amira Hassan",
+        initials: "AH",
+        accent: "lighter",
+        result: "Balanced work and wellness",
+        quote:
+          "The daily planner makes my priorities clear and keeps my energy steady.",
+      },
+      {
         name: "Julia Santos",
         initials: "JS",
+        accent: "light",
         result: "Stayed consistent for 6 months",
         quote:
           "I finally have a system that works. HabitPal keeps everything in one place.",
@@ -55,6 +61,7 @@ export default function Home() {
       {
         name: "Lucas Meyer",
         initials: "LM",
+        accent: "dark",
         result: "Improved focus and clarity",
         quote:
           "The reminders are subtle but effective. I feel more in control every day.",
@@ -62,6 +69,7 @@ export default function Home() {
       {
         name: "Priya Sharma",
         initials: "PS",
+        accent: "lighter",
         result: "Built a reading habit",
         quote:
           "HabitPal made it easy to track my progress and celebrate small wins.",
@@ -69,6 +77,7 @@ export default function Home() {
       {
         name: "Ethan Cole",
         initials: "EC",
+        accent: "light",
         result: "Completed 30 days of journaling",
         quote:
           "The layout is clean and helps me stay consistent without feeling overwhelmed.",
@@ -76,22 +85,25 @@ export default function Home() {
     ],
     [
       {
-        name: "Olivia Novak",
-        initials: "ON",
-        result: "Hit weekly goals consistently",
-        quote:
-          "I love how simple it is to set goals and review my progress each week.",
-      },
-      {
         name: "Marcus Lee",
         initials: "ML",
+        accent: "dark",
         result: "Built healthier daily habits",
         quote:
           "The tracking is smooth and I can see my momentum building over time.",
       },
       {
+        name: "Olivia Novak",
+        initials: "ON",
+        accent: "lighter",
+        result: "Hit weekly goals consistently",
+        quote:
+          "I love how simple it is to set goals and review my progress each week.",
+      },
+      {
         name: "Isabella Torres",
         initials: "IT",
+        accent: "light",
         result: "Stayed on track with planning",
         quote:
           "HabitPal keeps me aligned with my priorities without adding extra work.",
@@ -229,7 +241,7 @@ export default function Home() {
           </div>
         </section>
         <div className="mx-auto mt-12 max-w-3xl text-center">
-          <p className="text-3xl font-semibold leading-tight text-[#4D1895] sm:text-4xl">
+          <p className="text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
             Archive your goals
           </p>
           <p className="mt-2 text-3xl font-semibold leading-tight sm:text-4xl">
@@ -242,7 +254,7 @@ export default function Home() {
       </main>
       <section className="w-full px-4 pb-10 pt-4 sm:px-6 lg:px-8">
         <div className="mx-auto w-full max-w-6xl text-center">
-          <h2 className="text-3xl font-semibold text-[#4D1895] sm:text-4xl">
+          <h2 className="text-3xl font-semibold text-slate-900 sm:text-4xl">
             Why choose HabitPal
           </h2>
           <p className="mt-2 text-base text-slate-700">
@@ -298,7 +310,7 @@ export default function Home() {
       </section>
       <section className="w-full px-4 pb-16 pt-4 sm:px-6 lg:px-8">
         <div className="mx-auto w-full max-w-6xl text-center">
-          <h2 className="text-3xl font-semibold text-[#4D1895] sm:text-4xl">
+          <h2 className="text-3xl font-semibold text-slate-900 sm:text-4xl">
             Success stories
           </h2>
           <p className="mt-2 text-base text-slate-700">
@@ -326,10 +338,26 @@ export default function Home() {
                       className="rounded-2xl bg-white px-5 py-4 text-left shadow-sm"
                     >
                       <div className="flex items-center gap-3">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#4D1895] text-sm font-semibold text-white">
+                        <div
+                          className={`flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold ${
+                            testimonial.accent === "light"
+                              ? "bg-[#B88AF4] text-white"
+                              : testimonial.accent === "lighter"
+                              ? "bg-[#D7C4F9] text-[#4D1895]"
+                              : "bg-[#4D1895] text-white"
+                          }`}
+                        >
                           {testimonial.initials}
                         </div>
-                        <p className="text-sm font-semibold text-[#4D1895]">
+                        <p
+                          className={`text-sm font-semibold ${
+                            testimonial.accent === "light"
+                              ? "text-[#B88AF4]"
+                              : testimonial.accent === "lighter"
+                              ? "text-[#9D7BEA]"
+                              : "text-[#4D1895]"
+                          }`}
+                        >
                           {testimonial.name}
                         </p>
                       </div>
