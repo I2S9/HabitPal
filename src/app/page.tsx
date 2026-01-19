@@ -5,10 +5,17 @@ import { useState } from "react";
 export default function Home() {
   const [isComingSoonOpen, setIsComingSoonOpen] = useState(false);
   return (
-    <div className="flex min-h-screen flex-col bg-[#DCCAE5] font-sans">
+    <div
+      className="flex min-h-screen flex-col bg-[#DCCAE5] font-sans"
+      id="top"
+    >
       <header className="w-full px-4 pt-6 sm:px-6 lg:px-8">
         <nav className="mx-auto grid w-full max-w-6xl grid-cols-[auto_1fr_auto] items-center gap-8 rounded-3xl bg-white/80 px-8 py-5 text-center backdrop-blur">
-          <div className="flex items-center gap-4 justify-self-start">
+          <a
+            href="#top"
+            className="flex items-center gap-4 justify-self-start"
+            aria-label="Back to top"
+          >
             <img
               src="/assets/habitpal-logo.png"
               alt="HabitPal logo"
@@ -17,7 +24,7 @@ export default function Home() {
             <span className="text-xl font-semibold text-slate-900">
               HabitPal
             </span>
-          </div>
+          </a>
           <div className="flex flex-wrap items-center justify-center gap-6 text-lg font-medium text-slate-800 justify-self-center">
             <a className="transition-colors hover:text-slate-950" href="#">
               Features
@@ -120,10 +127,16 @@ export default function Home() {
                 <p className="text-sm font-semibold uppercase tracking-wide text-white/90">
                   Legal
                 </p>
-                <a className="text-sm text-white/80 hover:text-white" href="#">
+                <a
+                  className="text-sm text-white/80 transition-colors hover:text-white hover:underline"
+                  href="#"
+                >
                   Privacy Policy
                 </a>
-                <a className="text-sm text-white/80 hover:text-white" href="#">
+                <a
+                  className="text-sm text-white/80 transition-colors hover:text-white hover:underline"
+                  href="#"
+                >
                   Terms of use
                 </a>
               </div>
@@ -131,7 +144,10 @@ export default function Home() {
                 <p className="text-sm font-semibold uppercase tracking-wide text-white/90">
                   Company
                 </p>
-                <a className="text-sm text-white/80 hover:text-white" href="#">
+                <a
+                  className="text-sm text-white/80 transition-colors hover:text-white hover:underline"
+                  href="#"
+                >
                   Contact
                 </a>
               </div>
