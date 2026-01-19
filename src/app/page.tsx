@@ -242,7 +242,7 @@ export default function Home() {
         </section>
         <div className="mx-auto mt-12 max-w-3xl text-center">
           <p className="text-3xl font-semibold leading-tight text-[#4D1895] sm:text-4xl">
-            Archive your goals
+            Achieve your goals
           </p>
           <p className="mt-2 text-3xl font-semibold leading-tight sm:text-4xl">
             <span className="bg-linear-to-r from-[#E6B3F7] via-[#B55AF5] to-[#4D1895] bg-clip-text text-transparent">
