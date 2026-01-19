@@ -4,6 +4,100 @@ import { useState } from "react";
 
 export default function Home() {
   const [isComingSoonOpen, setIsComingSoonOpen] = useState(false);
+  const testimonialColumns = [
+    [
+      {
+        name: "Emily Rogers",
+        initials: "ER",
+        result: "Built a daily routine in 8 weeks",
+        quote:
+          "HabitPal helped me stick to my morning routine and stay consistent without stress.",
+      },
+      {
+        name: "David Chen",
+        initials: "DC",
+        result: "Completed 4 goals this quarter",
+        quote:
+          "The planning flow is simple and keeps me focused on the habits that matter.",
+      },
+      {
+        name: "Sophia Martin",
+        initials: "SM",
+        result: "Tracked 120 days in a row",
+        quote:
+          "Seeing my streaks grow every day keeps me motivated and proud of my progress.",
+      },
+    ],
+    [
+      {
+        name: "Amira Hassan",
+        initials: "AH",
+        result: "Balanced work and wellness",
+        quote:
+          "The daily planner makes my priorities clear and keeps my energy steady.",
+      },
+      {
+        name: "Noah Patel",
+        initials: "NP",
+        result: "Reached a long-term fitness goal",
+        quote:
+          "Small check-ins and progress charts make long goals feel achievable.",
+      },
+      {
+        name: "Julia Santos",
+        initials: "JS",
+        result: "Stayed consistent for 6 months",
+        quote:
+          "I finally have a system that works. HabitPal keeps everything in one place.",
+      },
+    ],
+    [
+      {
+        name: "Lucas Meyer",
+        initials: "LM",
+        result: "Improved focus and clarity",
+        quote:
+          "The reminders are subtle but effective. I feel more in control every day.",
+      },
+      {
+        name: "Priya Sharma",
+        initials: "PS",
+        result: "Built a reading habit",
+        quote:
+          "HabitPal made it easy to track my progress and celebrate small wins.",
+      },
+      {
+        name: "Ethan Cole",
+        initials: "EC",
+        result: "Completed 30 days of journaling",
+        quote:
+          "The layout is clean and helps me stay consistent without feeling overwhelmed.",
+      },
+    ],
+    [
+      {
+        name: "Olivia Novak",
+        initials: "ON",
+        result: "Hit weekly goals consistently",
+        quote:
+          "I love how simple it is to set goals and review my progress each week.",
+      },
+      {
+        name: "Marcus Lee",
+        initials: "ML",
+        result: "Built healthier daily habits",
+        quote:
+          "The tracking is smooth and I can see my momentum building over time.",
+      },
+      {
+        name: "Isabella Torres",
+        initials: "IT",
+        result: "Stayed on track with planning",
+        quote:
+          "HabitPal keeps me aligned with my priorities without adding extra work.",
+      },
+    ],
+  ];
   return (
     <div
       className="flex min-h-screen flex-col bg-[#DCCAE5] font-sans"
@@ -139,13 +233,58 @@ export default function Home() {
             Archive your goals
           </p>
           <p className="mt-2 text-3xl font-semibold leading-tight sm:text-4xl">
-            <span className="bg-gradient-to-r from-[#E6B3F7] via-[#B55AF5] to-[#4D1895] bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-[#E6B3F7] via-[#B55AF5] to-[#4D1895] bg-clip-text text-transparent">
               <span className="text-4xl font-semibold sm:text-5xl">4.2x</span>{" "}
               Faster
             </span>
           </p>
         </div>
       </main>
+      <section className="w-full px-4 pb-16 pt-4 sm:px-6 lg:px-8">
+        <div className="mx-auto w-full max-w-6xl text-center">
+          <h2 className="text-3xl font-semibold text-[#4D1895] sm:text-4xl">
+            Success stories
+          </h2>
+          <p className="mt-2 text-base text-slate-700">
+            From real people, with real results.
+          </p>
+        </div>
+        <div className="mx-auto mt-10 w-full max-w-6xl rounded-3xl bg-white/70 p-4 sm:p-6">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {testimonialColumns.map((column, columnIndex) => (
+              <div
+                key={`column-${columnIndex}`}
+                className="h-[520px] overflow-hidden rounded-3xl p-2"
+              >
+                <div className="testimonial-track flex flex-col gap-4">
+                  {[...column, ...column].map((testimonial, index) => (
+                    <div
+                      key={`${testimonial.name}-${index}`}
+                      aria-hidden={index >= column.length}
+                      className="rounded-2xl bg-white px-5 py-4 text-left shadow-sm"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#EDE7F6] text-sm font-semibold text-[#4D1895]">
+                          {testimonial.initials}
+                        </div>
+                        <p className="text-sm font-semibold text-[#4D1895]">
+                          {testimonial.name}
+                        </p>
+                      </div>
+                      <p className="mt-3 text-sm font-semibold text-slate-900">
+                        {testimonial.result}
+                      </p>
+                      <p className="mt-2 text-sm leading-6 text-slate-600">
+                        {testimonial.quote}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
       <footer className="w-full px-4 pb-10 sm:px-6 lg:px-8">
         <div className="mx-auto w-full max-w-6xl rounded-3xl bg-[#4D1895] px-8 py-10 text-white">
           <div className="grid gap-10 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
