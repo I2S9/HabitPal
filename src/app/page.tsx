@@ -9,7 +9,7 @@ export default function Home() {
       className="flex min-h-screen flex-col bg-[#DCCAE5] font-sans"
       id="top"
     >
-      <header className="w-full px-4 pt-6 sm:px-6 lg:px-8">
+      <header className="sticky top-0 z-40 w-full px-4 pt-6 sm:px-6 lg:px-8">
         <nav className="mx-auto grid w-full max-w-6xl grid-cols-[auto_1fr_auto] items-center gap-8 rounded-3xl bg-white/80 px-8 py-5 text-center backdrop-blur">
           <a
             href="#top"
