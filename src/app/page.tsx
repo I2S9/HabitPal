@@ -240,6 +240,62 @@ export default function Home() {
           </p>
         </div>
       </main>
+      <section className="w-full px-4 pb-10 pt-4 sm:px-6 lg:px-8">
+        <div className="mx-auto w-full max-w-6xl text-center">
+          <h2 className="text-3xl font-semibold text-[#4D1895] sm:text-4xl">
+            Why choose HabitPal
+          </h2>
+          <p className="mt-2 text-base text-slate-700">
+            Practical tools that keep your goals clear and your habits on track.
+          </p>
+        </div>
+        <div className="mx-auto mt-10 w-full max-w-6xl">
+          <div className="grid gap-6 md:grid-cols-3">
+            <div className="rounded-3xl bg-white p-6">
+              <img
+                src="/assets/dumbbell.png"
+                alt="Dumbbell icon"
+                className="h-20 w-20"
+              />
+              <h3 className="mt-4 text-lg font-semibold text-slate-900">
+                Build lasting habits
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-slate-600">
+                Create routines that stick with reminders, streaks, and progress
+                insights designed for long-term consistency.
+              </p>
+            </div>
+            <div className="rounded-3xl bg-white p-6">
+              <img
+                src="/assets/clock.png"
+                alt="Clock icon"
+                className="h-20 w-20"
+              />
+              <h3 className="mt-4 text-lg font-semibold text-slate-900">
+                Plan your days
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-slate-600">
+                Keep priorities visible with a focused daily planner that turns
+                big goals into clear, manageable steps.
+              </p>
+            </div>
+            <div className="rounded-3xl bg-white p-6">
+              <img
+                src="/assets/progress.png"
+                alt="Progress icon"
+                className="h-20 w-20"
+              />
+              <h3 className="mt-4 text-lg font-semibold text-slate-900">
+                Track real progress
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-slate-600">
+                Visualize growth over time with simple metrics that keep you
+                motivated and accountable.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
       <section className="w-full px-4 pb-16 pt-4 sm:px-6 lg:px-8">
         <div className="mx-auto w-full max-w-6xl text-center">
           <h2 className="text-3xl font-semibold text-[#4D1895] sm:text-4xl">
@@ -256,7 +312,13 @@ export default function Home() {
                 key={`column-${columnIndex}`}
                 className="h-[520px] overflow-hidden rounded-3xl p-2"
               >
-                <div className="testimonial-track flex flex-col gap-4">
+                <div
+                  className={`testimonial-track flex flex-col gap-4 ${
+                    columnIndex % 2 === 0
+                      ? "testimonial-track--slow"
+                      : "testimonial-track--fast testimonial-track--offset"
+                  }`}
+                >
                   {[...column, ...column].map((testimonial, index) => (
                     <div
                       key={`${testimonial.name}-${index}`}
@@ -264,7 +326,7 @@ export default function Home() {
                       className="rounded-2xl bg-white px-5 py-4 text-left shadow-sm"
                     >
                       <div className="flex items-center gap-3">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#EDE7F6] text-sm font-semibold text-[#4D1895]">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#4D1895] text-sm font-semibold text-white">
                           {testimonial.initials}
                         </div>
                         <p className="text-sm font-semibold text-[#4D1895]">
