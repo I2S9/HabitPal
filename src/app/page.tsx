@@ -128,7 +128,7 @@ export default function Home() {
           </div>
           <div className="flex justify-center lg:justify-end">
             <img
-              src="/assets/astronaut-pal.png"
+              src="/assets/astronaut.png"
               alt="HabitPal mascot floating in space"
               className="h-auto w-full max-w-md"
             />
