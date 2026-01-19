@@ -73,7 +73,79 @@ export default function Home() {
           </div>
         </nav>
       </header>
-      <main className="flex-1" />
+      <main className="flex-1 px-4 pb-16 pt-10 sm:px-6 lg:px-8">
+        <section className="mx-auto grid w-full max-w-6xl items-center gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
+          <div className="flex flex-col gap-6">
+            <div className="inline-flex w-fit items-center gap-2 rounded-full border border-black/10 bg-white/70 px-4 py-2 text-sm text-slate-700">
+              <span className="font-medium">Loved by 5M users</span>
+              <span className="text-slate-500">with 4.9 rating</span>
+            </div>
+            <div className="space-y-4">
+              <h1 className="text-4xl font-semibold leading-tight text-slate-900 sm:text-5xl">
+                Meet HabitPal
+              </h1>
+              <p className="text-3xl font-semibold leading-snug text-slate-900 sm:text-4xl">
+                Track your habits and goals with daily focus and clarity
+              </p>
+            </div>
+            <p className="max-w-xl text-base leading-7 text-slate-700">
+              Meet HabitPal, the app that helps you build lasting habits, plan
+              your days, and stay accountable to your long-term goals with
+              clear progress tracking.
+            </p>
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href="#"
+                className="inline-flex items-center"
+                aria-label="Download on the App Store"
+                onClick={(event) => {
+                  event.preventDefault();
+                  setIsComingSoonOpen(true);
+                }}
+              >
+                <img
+                  src="/assets/get-it-on-apple.png"
+                  alt="Download on the App Store"
+                  className="h-11 w-auto"
+                />
+              </a>
+              <a
+                href="#"
+                className="inline-flex items-center"
+                aria-label="Get it on Google Play"
+                onClick={(event) => {
+                  event.preventDefault();
+                  setIsComingSoonOpen(true);
+                }}
+              >
+                <img
+                  src="/assets/google-play-store-logo-png.webp"
+                  alt="Get it on Google Play"
+                  className="h-11 w-auto"
+                />
+              </a>
+            </div>
+          </div>
+          <div className="flex justify-center lg:justify-end">
+            <img
+              src="/assets/astronaut-pal.png"
+              alt="HabitPal mascot floating in space"
+              className="h-auto w-full max-w-md"
+            />
+          </div>
+        </section>
+        <div className="mx-auto mt-12 max-w-3xl text-center">
+          <p className="text-3xl font-semibold leading-tight text-[#4D1895] sm:text-4xl">
+            Archive your goals
+          </p>
+          <p className="mt-2 text-3xl font-semibold leading-tight sm:text-4xl">
+            <span className="bg-gradient-to-r from-[#E6B3F7] via-[#B55AF5] to-[#4D1895] bg-clip-text text-transparent">
+              <span className="text-4xl font-semibold sm:text-5xl">4.2x</span>{" "}
+              Faster
+            </span>
+          </p>
+        </div>
+      </main>
       <footer className="w-full px-4 pb-10 sm:px-6 lg:px-8">
         <div className="mx-auto w-full max-w-6xl rounded-3xl bg-[#4D1895] px-8 py-10 text-white">
           <div className="grid gap-10 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
