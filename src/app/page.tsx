@@ -349,6 +349,16 @@ export default function Home() {
           </p>
         </div>
       </main>
+      <div className="w-full px-4 pb-2 sm:px-6 lg:px-8">
+        <div className="mx-auto flex w-full max-w-6xl justify-center">
+          <a
+            href="#"
+            className="rounded-full bg-[#4D1895] px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#3C1374] sm:px-8 sm:text-base"
+          >
+            Start your smarter habit journey today
+          </a>
+        </div>
+      </div>
       <section className="w-full px-4 pb-10 pt-4 sm:px-6 lg:px-8">
         <div className="mx-auto w-full max-w-6xl text-center">
           <h2 className="text-3xl font-semibold text-[#4D1895] sm:text-4xl">
