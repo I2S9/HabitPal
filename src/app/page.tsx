@@ -432,7 +432,9 @@ export default function Home() {
             {testimonialColumns.map((column, columnIndex) => (
               <div
                 key={`column-${columnIndex}`}
-                className="h-[520px] overflow-hidden rounded-3xl p-2"
+                className={`overflow-hidden rounded-3xl p-2 ${
+                  columnIndex === 0 ? "block" : "hidden"
+                } h-[420px] sm:block sm:h-[520px]`}
               >
                 <div
                   className={`testimonial-track flex flex-col gap-4 ${
@@ -476,8 +478,8 @@ export default function Home() {
                       </p>
                       <p className="mt-2 text-sm leading-6 text-slate-600">
                         {testimonial.quote}
-          </p>
-        </div>
+                      </p>
+                    </div>
                   ))}
                 </div>
               </div>
