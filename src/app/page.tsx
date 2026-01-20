@@ -117,10 +117,10 @@ export default function Home() {
       id="top"
     >
       <header className="sticky top-0 z-40 w-full px-4 pt-6 sm:px-6 lg:px-8">
-        <nav className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-4 rounded-3xl bg-white/80 px-5 py-4 text-center backdrop-blur md:grid-cols-[auto_1fr_auto] md:gap-8 md:px-8 md:py-5">
+        <nav className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 rounded-3xl bg-white/80 px-5 py-4 backdrop-blur md:grid md:grid-cols-[auto_1fr_auto] md:gap-8 md:px-8 md:py-5 md:text-center">
           <a
             href="#top"
-            className="flex items-center gap-2 justify-self-center md:gap-4 md:justify-self-start"
+            className="flex items-center gap-2 md:gap-4 md:justify-self-start"
             aria-label="Back to top"
           >
             <img
@@ -184,7 +184,7 @@ export default function Home() {
               />
             </a>
           </div>
-          <div className="flex justify-center md:hidden">
+          <div className="flex md:hidden">
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen((open) => !open)}
@@ -286,7 +286,7 @@ export default function Home() {
             <div className="space-y-4">
               <h1 className="text-4xl font-semibold leading-tight text-[#4D1895] sm:text-5xl">
                 Meet HabitPal
-              </h1>
+          </h1>
               <p className="text-3xl font-semibold leading-snug text-slate-900 sm:text-4xl">
                 Track your habits and goals with daily focus and clarity
               </p>
@@ -476,8 +476,8 @@ export default function Home() {
                       </p>
                       <p className="mt-2 text-sm leading-6 text-slate-600">
                         {testimonial.quote}
-                      </p>
-                    </div>
+          </p>
+        </div>
                   ))}
                 </div>
               </div>
@@ -543,8 +543,8 @@ export default function Home() {
                   href="#"
                 >
                   Privacy Policy
-                </a>
-                <a
+          </a>
+          <a
                   className="text-sm text-white/80 transition-colors hover:text-white hover:underline"
                   href="#"
                 >
@@ -560,8 +560,8 @@ export default function Home() {
                    href="mailto:contact@tryhabitpal.com"
                  >
                   Contact
-                </a>
-              </div>
+          </a>
+        </div>
             </div>
           </div>
         </div>
