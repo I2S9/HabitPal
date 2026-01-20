@@ -142,7 +142,10 @@ export default function Home() {
             >
               Rating
             </a>
-            <a className="transition-colors hover:text-slate-950" href="#">
+            <a
+              className="transition-colors hover:text-slate-950"
+              href="mailto:contact@tryhabitpal.com"
+            >
               Contact
             </a>
             <a className="transition-colors hover:text-slate-950" href="#">
@@ -223,7 +226,7 @@ export default function Home() {
               </a>
               <a
                 className="transition-colors hover:text-slate-950"
-                href="#"
+                href="mailto:contact@tryhabitpal.com"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Contact
@@ -542,10 +545,10 @@ export default function Home() {
                 <p className="text-sm font-semibold uppercase tracking-wide text-white/90">
                   Company
                 </p>
-                <a
-                  className="text-sm text-white/80 transition-colors hover:text-white hover:underline"
-                  href="#"
-                >
+                 <a
+                   className="text-sm text-white/80 transition-colors hover:text-white hover:underline"
+                   href="mailto:contact@tryhabitpal.com"
+                 >
                   Contact
                 </a>
               </div>
