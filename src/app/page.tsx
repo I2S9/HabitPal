@@ -136,7 +136,10 @@ export default function Home() {
             <a className="transition-colors hover:text-slate-950" href="#">
               Features
             </a>
-            <a className="transition-colors hover:text-slate-950" href="#">
+            <a
+              className="transition-colors hover:text-slate-950"
+              href="#success-stories"
+            >
               Rating
             </a>
             <a className="transition-colors hover:text-slate-950" href="#">
@@ -211,11 +214,11 @@ export default function Home() {
               >
                 Features
               </a>
-              <a
-                className="transition-colors hover:text-slate-950"
-                href="#"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
+               <a
+                 className="transition-colors hover:text-slate-950"
+                 href="#success-stories"
+                 onClick={() => setIsMobileMenuOpen(false)}
+               >
                 Rating
               </a>
               <a
@@ -399,7 +402,10 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="w-full px-4 pb-16 pt-4 sm:px-6 lg:px-8">
+       <section
+         className="w-full scroll-mt-28 px-4 pb-16 pt-4 sm:px-6 lg:px-8"
+         id="success-stories"
+       >
         <div className="mx-auto w-full max-w-6xl text-center">
           <h2 className="text-3xl font-semibold text-[#4D1895] sm:text-4xl">
             Success stories
