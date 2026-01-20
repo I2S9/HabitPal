@@ -4,6 +4,7 @@ import { useState } from "react";
 
 export default function Home() {
   const [isComingSoonOpen, setIsComingSoonOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const testimonialColumns = [
     [
       {
@@ -116,22 +117,22 @@ export default function Home() {
       id="top"
     >
       <header className="sticky top-0 z-40 w-full px-4 pt-6 sm:px-6 lg:px-8">
-        <nav className="mx-auto grid w-full max-w-6xl grid-cols-[auto_1fr_auto] items-center gap-8 rounded-3xl bg-white/80 px-8 py-5 text-center backdrop-blur">
+        <nav className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-4 rounded-3xl bg-white/80 px-5 py-4 text-center backdrop-blur md:grid-cols-[auto_1fr_auto] md:gap-8 md:px-8 md:py-5">
           <a
             href="#top"
-            className="flex items-center gap-4 justify-self-start"
+            className="flex items-center gap-2 justify-self-center md:gap-4 md:justify-self-start"
             aria-label="Back to top"
           >
             <img
               src="/assets/habitpal-logo.png"
               alt="HabitPal logo"
-              className="h-12 w-12 shrink-0"
+              className="h-9 w-9 shrink-0 md:h-12 md:w-12"
             />
-            <span className="text-xl font-semibold text-slate-900">
+            <span className="text-base font-semibold text-slate-900 md:text-xl">
               HabitPal
             </span>
           </a>
-          <div className="flex flex-wrap items-center justify-center gap-6 text-lg font-medium text-slate-800 justify-self-center">
+          <div className="hidden flex-wrap items-center justify-center gap-3 text-sm font-medium text-slate-800 md:flex md:gap-6 md:text-lg md:justify-self-center">
             <a className="transition-colors hover:text-slate-950" href="#">
               Features
             </a>
@@ -145,7 +146,7 @@ export default function Home() {
               About Us
             </a>
           </div>
-          <div className="flex items-center gap-3 justify-self-end">
+          <div className="hidden items-center justify-center gap-2 md:flex md:gap-3 md:justify-self-end">
             <a
               href="#"
               className="inline-flex items-center"
@@ -177,7 +178,97 @@ export default function Home() {
               />
             </a>
           </div>
+          <div className="flex justify-center md:hidden">
+            <button
+              type="button"
+              onClick={() => setIsMobileMenuOpen((open) => !open)}
+              className="inline-flex items-center justify-center rounded-full border border-black/10 bg-white/80 px-4 py-2 text-sm font-medium text-slate-800 transition-colors hover:bg-white"
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-nav"
+            >
+              <span>Menu</span>
+              <svg
+                className="ml-2 h-4 w-4"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+            </button>
+          </div>
         </nav>
+        {isMobileMenuOpen ? (
+          <div
+            id="mobile-nav"
+            className="mx-auto mt-3 w-full max-w-6xl rounded-3xl bg-white/90 px-5 py-4 text-center backdrop-blur md:hidden"
+          >
+            <div className="flex flex-col items-center gap-3 text-sm font-medium text-slate-800">
+              <a
+                className="transition-colors hover:text-slate-950"
+                href="#"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Features
+              </a>
+              <a
+                className="transition-colors hover:text-slate-950"
+                href="#"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Rating
+              </a>
+              <a
+                className="transition-colors hover:text-slate-950"
+                href="#"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Contact
+              </a>
+              <a
+                className="transition-colors hover:text-slate-950"
+                href="#"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                About Us
+              </a>
+              <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
+                <a
+                  href="#"
+                  className="inline-flex items-center"
+                  aria-label="Download on the App Store"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    setIsComingSoonOpen(true);
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  <img
+                    src="/assets/get-it-on-apple.png"
+                    alt="Download on the App Store"
+                    className="h-8 w-auto"
+                  />
+                </a>
+                <a
+                  href="#"
+                  className="inline-flex items-center"
+                  aria-label="Get it on Google Play"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    setIsComingSoonOpen(true);
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  <img
+                    src="/assets/google-play-store-logo-png.webp"
+                    alt="Get it on Google Play"
+                    className="h-8 w-auto"
+                  />
+                </a>
+              </div>
+            </div>
+          </div>
+        ) : null}
       </header>
       <main className="flex-1 px-4 pb-16 pt-10 sm:px-6 lg:px-8">
         <section className="mx-auto grid w-full max-w-6xl items-center gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
