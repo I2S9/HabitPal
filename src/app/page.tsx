@@ -476,6 +476,22 @@ export default function Home() {
                       <p className="mt-3 text-sm font-semibold text-slate-900">
                         {testimonial.result}
                       </p>
+                      <div
+                        className="mt-2 flex items-center gap-0.5 text-amber-400"
+                        aria-label="5 out of 5 stars"
+                      >
+                        {Array.from({ length: 5 }).map((_, starIndex) => (
+                          <svg
+                            key={`${testimonial.name}-star-${starIndex}`}
+                            viewBox="0 0 20 20"
+                            className="h-5 w-5"
+                            fill="currentColor"
+                            aria-hidden="true"
+                          >
+                            <path d="M10 1.5l2.47 5 5.52.8-4 3.9.95 5.5L10 14.9 5.06 16.7l.95-5.5-4-3.9 5.52-.8L10 1.5z" />
+                          </svg>
+                        ))}
+                      </div>
                       <p className="mt-2 text-sm leading-6 text-slate-600">
                         {testimonial.quote}
                       </p>
