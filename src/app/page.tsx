@@ -13,7 +13,7 @@ export default function Home() {
         accent: "light",
         result: "Completed 4 goals this quarter",
         quote:
-          "The planning flow is simple and keeps me focused on the habits that matter.",
+          "The planning flow is simple and keeps me focused on the habits that matter. I can see progress at a glance and stay motivated.",
       },
       {
         name: "Emily Rogers",
@@ -21,7 +21,7 @@ export default function Home() {
         accent: "dark",
         result: "Built a daily routine in 8 weeks",
         quote:
-          "HabitPal helped me stick to my morning routine and stay consistent without stress.",
+          "HabitPal helped me stick to my morning routine and stay consistent without stress. The reminders are gentle and actually work.",
       },
       {
         name: "Sophia Martin",
@@ -29,7 +29,7 @@ export default function Home() {
         accent: "lighter",
         result: "Tracked 120 days in a row",
         quote:
-          "Seeing my streaks grow every day keeps me motivated and proud of my progress.",
+          "Seeing my streaks grow every day keeps me motivated and proud of my progress. It feels rewarding to check in daily.",
       },
     ],
     [
@@ -39,7 +39,7 @@ export default function Home() {
         accent: "dark",
         result: "Reached a long-term fitness goal",
         quote:
-          "Small check-ins and progress charts make long goals feel achievable.",
+          "Small check-ins and progress charts make long goals feel achievable. It breaks everything into steps I can handle.",
       },
       {
         name: "Amira Hassan",
@@ -47,7 +47,7 @@ export default function Home() {
         accent: "lighter",
         result: "Balanced work and wellness",
         quote:
-          "The daily planner makes my priorities clear and keeps my energy steady.",
+          "The daily planner makes my priorities clear and keeps my energy steady. I finally know what to focus on each day.",
       },
       {
         name: "Julia Santos",
@@ -55,7 +55,7 @@ export default function Home() {
         accent: "light",
         result: "Stayed consistent for 6 months",
         quote:
-          "I finally have a system that works. HabitPal keeps everything in one place.",
+          "I finally have a system that works. HabitPal keeps everything in one place, so I do not lose track anymore.",
       },
     ],
     [
@@ -65,7 +65,7 @@ export default function Home() {
         accent: "dark",
         result: "Improved focus and clarity",
         quote:
-          "The reminders are subtle but effective. I feel more in control every day.",
+          "The reminders are subtle but effective. I feel more in control every day and I waste less time deciding.",
       },
       {
         name: "Priya Sharma",
@@ -73,7 +73,7 @@ export default function Home() {
         accent: "lighter",
         result: "Built a reading habit",
         quote:
-          "HabitPal made it easy to track my progress and celebrate small wins.",
+          "HabitPal made it easy to track my progress and celebrate small wins. It keeps me consistent without pressure.",
       },
       {
         name: "Ethan Cole",
@@ -81,7 +81,7 @@ export default function Home() {
         accent: "light",
         result: "Completed 30 days of journaling",
         quote:
-          "The layout is clean and helps me stay consistent without feeling overwhelmed.",
+          "The layout is clean and helps me stay consistent without feeling overwhelmed. I actually look forward to checking in.",
       },
     ],
     [
@@ -91,7 +91,7 @@ export default function Home() {
         accent: "dark",
         result: "Built healthier daily habits",
         quote:
-          "The tracking is smooth and I can see my momentum building over time.",
+          "The tracking is smooth and I can see my momentum building over time. It makes me want to keep going.",
       },
       {
         name: "Olivia Novak",
@@ -99,7 +99,7 @@ export default function Home() {
         accent: "lighter",
         result: "Hit weekly goals consistently",
         quote:
-          "I love how simple it is to set goals and review my progress each week.",
+          "I love how simple it is to set goals and review my progress each week. The summaries make it easy to reflect.",
       },
       {
         name: "Isabella Torres",
@@ -107,7 +107,7 @@ export default function Home() {
         accent: "light",
         result: "Stayed on track with planning",
         quote:
-          "HabitPal keeps me aligned with my priorities without adding extra work.",
+          "HabitPal keeps me aligned with my priorities without adding extra work. It fits into my routine perfectly.",
       },
     ],
   ];
@@ -494,8 +494,8 @@ export default function Home() {
                       </div>
                       <p className="mt-2 text-sm leading-6 text-slate-600">
                         {testimonial.quote}
-                      </p>
-                    </div>
+          </p>
+        </div>
                   ))}
                 </div>
               </div>
