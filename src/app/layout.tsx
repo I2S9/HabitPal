@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "HabitPal",
+  title: "HabitPal - AI Habit Tracker",
   description: "HabitPal marketing website",
   icons: {
     icon: "/assets/habitpal-logo.png",
