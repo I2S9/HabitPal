@@ -14,9 +14,9 @@ export default function PrivacyPolicyPage() {
       <header className="sticky top-0 z-40 w-full px-4 pt-6 sm:px-6 lg:px-8">
         <nav className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 rounded-3xl bg-white/80 px-5 py-4 backdrop-blur md:grid md:grid-cols-[auto_1fr_auto] md:gap-8 md:px-8 md:py-5 md:text-center">
           <a
-            href="#top"
+            href="/#top"
             className="flex items-center gap-2 md:gap-4 md:justify-self-start"
-            aria-label="Back to top"
+            aria-label="Back to home"
           >
             <img
               src="/assets/habitpal-logo.png"
@@ -28,7 +28,10 @@ export default function PrivacyPolicyPage() {
             </span>
           </a>
           <div className="hidden flex-wrap items-center justify-center gap-3 text-sm font-medium text-slate-800 md:flex md:gap-6 md:text-lg md:justify-self-center">
-            <a className="transition-colors hover:text-slate-950" href="#">
+            <a
+              className="transition-colors hover:text-slate-950"
+              href="/#achieve-goals"
+            >
               Features
             </a>
             <a
@@ -112,7 +115,7 @@ export default function PrivacyPolicyPage() {
             <div className="flex flex-col items-center gap-3 text-sm font-medium text-slate-800">
               <a
                 className="transition-colors hover:text-slate-950"
-                href="#"
+                href="/#achieve-goals"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Features

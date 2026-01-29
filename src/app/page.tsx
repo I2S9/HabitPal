@@ -337,7 +337,10 @@ export default function Home() {
             />
           </div>
         </section>
-        <div className="mx-auto mt-12 max-w-3xl text-center">
+        <div
+          className="mx-auto mt-12 max-w-3xl text-center"
+          id="achieve-goals"
+        >
           <p className="text-3xl font-semibold leading-tight text-[#4D1895] sm:text-4xl">
             Achieve your goals
           </p>
@@ -359,7 +362,10 @@ export default function Home() {
           </a>
         </div>
       </div>
-      <section className="w-full px-4 pb-10 pt-4 sm:px-6 lg:px-8">
+      <section
+        className="w-full px-4 pb-10 pt-4 sm:px-6 lg:px-8"
+        id="why-choose"
+      >
         <div className="mx-auto w-full max-w-6xl text-center">
           <h2 className="text-3xl font-semibold text-[#4D1895] sm:text-4xl">
             Why choose HabitPal
