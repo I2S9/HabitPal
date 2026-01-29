@@ -570,7 +570,7 @@ export default function Home() {
           </a>
           <a
                   className="text-sm text-white/80 transition-colors hover:text-white hover:underline"
-                  href="#"
+                  href="/terms-of-use"
                 >
                   Terms of use
                 </a>
