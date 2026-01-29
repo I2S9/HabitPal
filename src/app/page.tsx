@@ -558,7 +558,7 @@ export default function Home() {
                 </p>
                 <a
                   className="text-sm text-white/80 transition-colors hover:text-white hover:underline"
-                  href="#"
+                  href="/privacy-policy"
                 >
                   Privacy Policy
           </a>
