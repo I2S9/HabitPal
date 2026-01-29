@@ -177,7 +177,7 @@ export default function PrivacyPolicyPage() {
         ) : null}
       </header>
       <main className="flex-1 px-4 pb-16 pt-10 sm:px-6 lg:px-8">
-        <section className="mx-auto w-full max-w-4xl">
+        <section className="mx-auto w-full max-w-6xl">
           <h1 className="text-4xl font-semibold text-[#4D1895] sm:text-5xl">
             Privacy Policy
           </h1>
