@@ -326,15 +326,11 @@ export default function PrivacyPolicyPage() {
               <h2 className="text-lg font-semibold text-[#4D1895]">
                 10. Contact Information
               </h2>
-              <p className="mt-2">
-                Company/Publisher: [Company Name]
-              </p>
+              <p className="mt-2">Company/Publisher: HabitPal</p>
               <p className="mt-2">
                 Contact Email: privacy@habitpal.app
               </p>
-              <p className="mt-2">
-                Country/Jurisdiction: [Country]
-              </p>
+              <p className="mt-2">Country/Jurisdiction: France</p>
               <p className="mt-2">
                 You can contact us to exercise your privacy rights or ask
                 questions about this policy.
