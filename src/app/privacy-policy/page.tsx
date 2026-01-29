@@ -208,16 +208,18 @@ export default function PrivacyPolicyPage() {
                 2. Information We Collect
               </h2>
               <p className="mt-2">
-                We collect only the information necessary to provide and improve
-                HabitPal. Depending on how you use the app, we may collect:
+                We collect only the information necessary to provide and
+                improve HabitPal. Depending on how you use the app, we may
+                collect:
               </p>
               <p className="mt-2">
-                Account information such as email address and username, user
-                content you create (habits, goals, journal entries, calendar
-                events, reflections, and Cookie Jar items), AI chat messages
-                submitted to generate responses, usage data about interactions
-                with features, device data such as OS version and app version,
-                and analytics, crash, and performance data to improve stability.
+                Account information such as email address and username, user-
+                generated content you create (habits, goals, journal entries,
+                calendar events, reflections, and Cookie Jar items), AI chat
+                messages submitted to generate responses, usage data about
+                interactions with features, device data such as OS version and
+                app version, and analytics, crash, and performance data to
+                improve stability.
               </p>
             </div>
             <div>
@@ -226,11 +228,11 @@ export default function PrivacyPolicyPage() {
               </h2>
               <p className="mt-2">
                 We use information to provide app functionality, personalize
-                your experience, maintain your account, sync your data across
-                devices, provide AI chat responses, improve features, monitor
-                reliability, and comply with legal obligations. We do not use
-                your personal data for advertising profiling or marketing
-                without consent.
+                your experience, maintain your account, sync your
+                data across devices, provide AI chat responses, improve
+                features, monitor reliability, and comply with legal
+                obligations. We do not use your personal data for advertising
+                profiling or marketing without consent.
               </p>
             </div>
             <div>
@@ -272,16 +274,17 @@ export default function PrivacyPolicyPage() {
               <p className="mt-2">
                 For users in the European Economic Area and the United Kingdom,
                 we process personal data based on consent, contract performance,
-                legitimate interests in improving the app, and legal obligations
-                (as applicable). You have rights to access, correct, delete, or
-                export your data, and to withdraw consent at any time.
+                legitimate interests in improving the app, and legal
+                obligations (as applicable). You have rights to access,
+                correct, delete, or export your data, and to withdraw consent
+                at any time.
               </p>
               <p className="mt-2">
-                For California residents, we comply with the CCPA/CPRA. You have
-                the right to know what personal information we collect, to
+                For California residents, we comply with the CCPA/CPRA. You
+                have the right to know what personal information we collect, to
                 request deletion, to correct inaccurate information, to opt out
-                of the sale or sharing of personal information (we do not sell
-                or share for advertising), and to receive data in a portable
+                of sale or sharing of personal information (we do not sell or
+                share for advertising), and to receive data in a portable
                 format.
               </p>
             </div>
@@ -327,9 +330,7 @@ export default function PrivacyPolicyPage() {
                 10. Contact Information
               </h2>
               <p className="mt-2">Company/Publisher: HabitPal</p>
-              <p className="mt-2">
-                Contact Email: privacy@habitpal.app
-              </p>
+              <p className="mt-2">Contact Email: contact@tryhabitpal.com</p>
               <p className="mt-2">Country/Jurisdiction: France</p>
               <p className="mt-2">
                 You can contact us to exercise your privacy rights or ask
