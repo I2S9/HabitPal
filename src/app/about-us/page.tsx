@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function TermsOfUsePage() {
+export default function AboutUsPage() {
   const [isComingSoonOpen, setIsComingSoonOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -185,192 +185,55 @@ export default function TermsOfUsePage() {
       <main className="flex-1 px-4 pb-16 pt-10 sm:px-6 lg:px-8">
         <section className="mx-auto w-full max-w-6xl">
           <h1 className="text-4xl font-semibold text-[#4D1895] sm:text-5xl">
-            Terms of Use
+            About Us
           </h1>
           <div className="mt-6 space-y-6 text-justify text-sm leading-7 text-slate-700 sm:text-base">
             <p>
-              These Terms of Use govern your access to and use of the HabitPal
-              mobile application and related services. By using HabitPal, you
-              agree to be bound by these Terms. If you do not accept them,
-              please do not use the app. These Terms are intended to be
-              compatible with Apple&apos;s Standard End User License Agreement
-              (EULA), and any additional terms do not conflict with Apple&apos;s
-              EULA.
+              HabitPal is built for people who want steady progress, clear
+              priorities, and a simple way to turn long-term dreams into daily
+              action. We believe lasting change happens through small, consistent
+              steps, supported by tools that make reflection and planning easy.
             </p>
             <div>
               <h2 className="text-lg font-semibold text-[#4D1895]">
-                1. App Identification
-              </h2>
-              <p className="mt-2">App name: HabitPal</p>
-              <p className="mt-2">Publisher/Company: HabitPal</p>
-              <p className="mt-2">Contact email: contact@tryhabitpal.com</p>
-              <p className="mt-2">Platform: iOS</p>
-              <p className="mt-2">Governing law: France</p>
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-[#4D1895]">
-                2. Acceptance of Terms
+                Our Mission
               </h2>
               <p className="mt-2">
-                By downloading, accessing, or using HabitPal, you agree to these
-                Terms. If you do not agree, you must not use the app. You must
-                be at least 13 years old (or the legal age in your country) to
-                use the app.
+                Our mission is to help you build habits that stick and create a
+                healthier, more intentional life. HabitPal focuses on clarity,
+                motivation, and accountability without adding stress or noise to
+                your day.
               </p>
             </div>
             <div>
               <h2 className="text-lg font-semibold text-[#4D1895]">
-                3. Use of the Application
+                What We Build
               </h2>
               <p className="mt-2">
-                You agree to use HabitPal only for lawful purposes and in
-                accordance with these Terms. You must not use the app in a way
-                that could damage, disable, or interfere with the app or its
-                services. HabitPal is a habit-building and personal development
-                app that helps users track habits and goals, define long-term
-                goals (Dreams), plan schedules with a calendar, view analytics
-                and insights, write journal entries, chat with an AI companion
-                for reflection, and store positive memories in a Cookie Jar. The
-                app is a self-improvement and productivity tool and does not
-                provide medical, psychological, or professional advice.
+                HabitPal brings together habit tracking, long-term goal planning,
+                a calendar for daily schedules, progress analytics, private
+                journaling, an AI companion for reflection, and a Cookie Jar to
+                save positive memories and achievements. Everything is designed
+                to keep your progress visible and your goals within reach.
               </p>
             </div>
             <div>
               <h2 className="text-lg font-semibold text-[#4D1895]">
-                4. User Content
+                Our Values
               </h2>
               <p className="mt-2">
-                You retain all rights to your content, including habits, goals,
-                journal entries, and AI chat messages. You grant HabitPal a
-                worldwide, non-exclusive, royalty-free license to use, process,
-                and display this content solely to operate and improve the app.
-                We do not sell your content and do not share it publicly unless
-                you explicitly choose to do so.
+                We prioritize privacy, clarity, and consistency. We design
+                features that respect your time, help you focus on what matters,
+                and support meaningful growth over quick fixes.
               </p>
             </div>
             <div>
               <h2 className="text-lg font-semibold text-[#4D1895]">
-                5. Accounts
+                Get in Touch
               </h2>
               <p className="mt-2">
-                If you create an account, you are responsible for maintaining
-                the confidentiality of your account information and for all
-                activities that occur under your account. You agree to provide
-                accurate information and keep it updated. HabitPal may suspend
-                or terminate accounts that violate these Terms or misuse the
-                app.
-              </p>
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-[#4D1895]">
-                6. AI Features Disclaimer
-              </h2>
-              <p className="mt-2">
-                AI responses are generated automatically for reflection and
-                productivity support. AI is not a therapist, doctor, or
-                professional advisor. You should seek qualified professionals
-                when needed. HabitPal is not responsible for decisions made
-                based on AI responses.
-              </p>
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-[#4D1895]">
-                7. In-App Purchases
-              </h2>
-              <p className="mt-2">
-                If the app offers in-app purchases or subscriptions, payments
-                are processed by Apple In-App Purchases and are subject to
-                Apple&apos;s terms and conditions. Apple manages billing and
-                refunds according to its policies. Subscriptions may auto-renew
-                unless canceled in your Apple ID settings. Any free trial, if
-                offered, will be subject to the terms shown at the time of
-                enrollment.
-              </p>
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-[#4D1895]">
-                8. Acceptable Use
-              </h2>
-              <p className="mt-2">
-                You agree not to use the app for illegal activities, harassment,
-                abuse, or hate speech, and not to attempt to reverse engineer
-                the app. You must not misuse AI features or upload harmful or
-                unlawful content. HabitPal may suspend or terminate access for
-                violations.
-              </p>
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-[#4D1895]">
-                9. Intellectual Property
-              </h2>
-              <p className="mt-2">
-                The app, design, mascots, branding, and code are the property of
-                HabitPal or its licensors. You may not copy, modify, distribute,
-                or create derivative works without permission.
-              </p>
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-[#4D1895]">
-                10. Privacy Policy
-              </h2>
-              <p className="mt-2">
-                Your use of HabitPal is also governed by the Privacy Policy. You
-                can review it at: https://habitpal.com/privacy-policy
-              </p>
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-[#4D1895]">
-                11. Limitation of Liability and Warranties
-              </h2>
-              <p className="mt-2">
-                The app is provided &quot;as is&quot; and &quot;as available&quot;
-                without warranty of any kind. We do not guarantee that the app
-                will be error-free or continuously available. To the maximum
-                extent permitted by law, HabitPal is not liable for indirect or
-                consequential damages, including loss of data, emotional
-                distress, or business losses.
-              </p>
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-[#4D1895]">
-                12. Changes to the Terms
-              </h2>
-              <p className="mt-2">
-                We reserve the right to modify these Terms at any time. Changes
-                take effect when published in the app or on our website.
-                Continued use of the app means acceptance of the updated Terms.
-              </p>
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-[#4D1895]">
-                13. Termination
-              </h2>
-              <p className="mt-2">
-                You may stop using the app at any time. HabitPal may suspend or
-                terminate access for violations of these Terms. For how we
-                handle your data after termination, please refer to the Privacy
-                Policy.
-              </p>
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-[#4D1895]">
-                14. Governing Law and Jurisdiction
-              </h2>
-              <p className="mt-2">
-                These Terms are governed by the laws of France, and disputes are
-                subject to the jurisdiction of the competent courts in that
-                jurisdiction.
-              </p>
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-[#4D1895]">
-                15. Apple-Specific Terms
-              </h2>
-              <p className="mt-2">
-                Apple is not a party to these Terms and is not responsible for
-                the HabitPal app or its content. Apple has no obligation to
-                provide support services. Apple is a third-party beneficiary of
-                these Terms and may enforce them against you.
+                For questions, partnerships, or feedback, email us at{" "}
+                contact@tryhabitpal.com.
               </p>
             </div>
           </div>

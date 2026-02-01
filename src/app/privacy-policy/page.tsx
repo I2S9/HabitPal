@@ -46,7 +46,10 @@ export default function PrivacyPolicyPage() {
             >
               Contact
             </a>
-            <a className="transition-colors hover:text-slate-950" href="#">
+            <a
+              className="transition-colors hover:text-slate-950"
+              href="/about-us"
+            >
               About Us
             </a>
           </div>
@@ -136,7 +139,7 @@ export default function PrivacyPolicyPage() {
               </a>
               <a
                 className="transition-colors hover:text-slate-950"
-                href="#"
+                href="/about-us"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 About Us
