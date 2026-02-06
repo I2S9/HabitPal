@@ -2,9 +2,90 @@
 
 import { useState } from "react";
 
+type Submission = {
+  id: number;
+  username: string;
+  category: "feature" | "bug" | "review";
+  message: string;
+  date: string;
+  upvotes: number;
+};
+
 export default function HabitPalSuggestionsPage() {
   const [isComingSoonOpen, setIsComingSoonOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [submissions, setSubmissions] = useState<Submission[]>([]);
+  const [formUsername, setFormUsername] = useState("");
+  const [formCategory, setFormCategory] = useState<
+    "feature" | "bug" | "review"
+  >("feature");
+  const [formMessage, setFormMessage] = useState("");
+  const [filterType, setFilterType] = useState("all");
+  const [sortBy, setSortBy] = useState("date");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [upvotedIds, setUpvotedIds] = useState<Set<number>>(new Set());
+
+  const handleSubmit = () => {
+    if (!formUsername.trim() || !formMessage.trim()) return;
+    const now = new Date();
+    const dateStr = now.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+    const newSubmission: Submission = {
+      id: Date.now(),
+      username: formUsername.trim(),
+      category: formCategory,
+      message: formMessage.trim(),
+      date: dateStr,
+      upvotes: 0,
+    };
+    setSubmissions((prev) => [newSubmission, ...prev]);
+    setFormUsername("");
+    setFormMessage("");
+    setFormCategory("feature");
+    setIsFormOpen(false);
+  };
+
+  const handleUpvote = (id: number) => {
+    if (upvotedIds.has(id)) return;
+    setUpvotedIds((prev) => new Set(prev).add(id));
+    setSubmissions((prev) =>
+      prev.map((s) => (s.id === id ? { ...s, upvotes: s.upvotes + 1 } : s))
+    );
+  };
+
+  const categoryLabel = (cat: string) => {
+    if (cat === "feature") return "Feature";
+    if (cat === "bug") return "Bug";
+    return "Review";
+  };
+
+  const categoryColor = (cat: string) => {
+    if (cat === "feature") return "bg-[#4D1895] text-white";
+    if (cat === "bug") return "bg-red-500 text-white";
+    return "bg-amber-400 text-slate-900";
+  };
+
+  const filtered = submissions
+    .filter((s) => {
+      if (filterType !== "all" && s.category !== filterType) return false;
+      if (
+        searchQuery.trim() &&
+        !s.message.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        !s.username.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+        return false;
+      return true;
+    })
+    .sort((a, b) => {
+      if (sortBy === "rating") return b.upvotes - a.upvotes;
+      if (sortBy === "alphabetical")
+        return a.message.localeCompare(b.message);
+      return b.id - a.id;
+    });
 
   return (
     <div
@@ -182,13 +263,13 @@ export default function HabitPalSuggestionsPage() {
           </div>
         ) : null}
       </header>
-      <main className="flex flex-1 px-4 pt-10 sm:px-6 lg:px-8">
-        <section className="mx-auto flex w-full max-w-6xl flex-1 flex-col">
+      <main className="flex-1 px-4 pt-10 sm:px-6 lg:px-8">
+        <section className="mx-auto w-full max-w-6xl">
           <h1 className="text-4xl font-semibold text-[#4D1895] sm:text-5xl">
             HabitPal suggestions
           </h1>
-          <div className="mt-6 flex flex-1 flex-col gap-6 text-justify text-sm leading-7 text-slate-700 sm:text-base">
-            <p>
+          <div className="mt-6 flex flex-col gap-6 text-sm leading-7 text-slate-700 sm:text-base">
+            <p className="text-justify">
               We welcome feature ideas, improvement suggestions, and bug reports
               to make HabitPal better for everyone.
             </p>
@@ -211,6 +292,8 @@ export default function HabitPalSuggestionsPage() {
                   id="suggestions-search"
                   type="text"
                   placeholder="Search suggestions"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full rounded-full border border-black/10 bg-white px-11 py-2.5 text-sm text-slate-800 outline-none transition focus:border-[#4D1895] focus:ring-2 focus:ring-[#4D1895]/30"
                 />
               </div>
@@ -220,12 +303,14 @@ export default function HabitPalSuggestionsPage() {
                 </label>
                 <select
                   id="suggestions-type"
+                  value={filterType}
+                  onChange={(e) => setFilterType(e.target.value)}
                   className="w-full appearance-none rounded-full border border-black/10 bg-white px-4 py-2.5 text-sm text-slate-800 outline-none transition focus:border-[#4D1895] focus:ring-2 focus:ring-[#4D1895]/30"
-                  defaultValue="all"
                 >
                   <option value="all">All types</option>
                   <option value="feature">Features</option>
                   <option value="bug">Bugs</option>
+                  <option value="review">Reviews</option>
                 </select>
                 <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-slate-400">
                   <svg
@@ -244,8 +329,9 @@ export default function HabitPalSuggestionsPage() {
                 </label>
                 <select
                   id="suggestions-sort"
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
                   className="w-full appearance-none rounded-full border border-black/10 bg-white px-4 py-2.5 text-sm text-slate-800 outline-none transition focus:border-[#4D1895] focus:ring-2 focus:ring-[#4D1895]/30"
-                  defaultValue="date"
                 >
                   <option value="date">Sort by date</option>
                   <option value="rating">Sort by rating</option>
@@ -264,6 +350,7 @@ export default function HabitPalSuggestionsPage() {
               </div>
               <button
                 type="button"
+                onClick={() => setIsFormOpen(true)}
                 className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-[#4D1895] text-white transition-colors hover:bg-[#3C1374]"
                 aria-label="Add a suggestion"
                 title="Add a suggestion"
@@ -278,7 +365,57 @@ export default function HabitPalSuggestionsPage() {
                 </svg>
               </button>
             </div>
-            <div className="min-h-[300px] flex-1 rounded-3xl bg-white" />
+            {filtered.length === 0 ? (
+              <p className="py-28 text-center text-base text-[#4D1895]">
+                No submissions yet. Be the first to share your thoughts.
+              </p>
+            ) : (
+              <div className="flex flex-col gap-4">
+                {filtered.map((s) => (
+                  <div
+                    key={s.id}
+                    className="flex items-start gap-4 rounded-2xl bg-white px-5 py-4"
+                  >
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="text-sm font-semibold text-slate-900">
+                          {s.username}
+                        </span>
+                        <span
+                          className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${categoryColor(s.category)}`}
+                        >
+                          {categoryLabel(s.category)}
+                        </span>
+                        <span className="text-xs text-slate-400">{s.date}</span>
+                      </div>
+                      <p className="mt-2 text-sm leading-6 text-slate-700">
+                        {s.message}
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleUpvote(s.id)}
+                      className={`flex shrink-0 flex-col items-center gap-0.5 rounded-xl px-3 py-2 text-xs font-medium transition-colors ${
+                        upvotedIds.has(s.id)
+                          ? "bg-[#4D1895] text-white"
+                          : "cursor-pointer bg-[#DCCAE5] text-[#4D1895] hover:bg-[#cbb8d9]"
+                      }`}
+                      aria-label={`Upvote (${s.upvotes})`}
+                    >
+                      <svg
+                        viewBox="0 0 20 20"
+                        className="h-4 w-4"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path d="M10 5.83l-4.29 4.3a1 1 0 0 1-1.42-1.42l5-5a1 1 0 0 1 1.42 0l5 5a1 1 0 0 1-1.42 1.42L10 5.83z" />
+                      </svg>
+                      <span>{s.upvotes}</span>
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </section>
       </main>
@@ -380,6 +517,113 @@ export default function HabitPalSuggestionsPage() {
           </div>
         </div>
       </footer>
+      {isFormOpen ? (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="form-title"
+        >
+          <div className="relative w-full max-w-lg rounded-3xl bg-white px-8 py-10">
+            <button
+              type="button"
+              className="absolute right-6 top-4 text-slate-500 transition-colors hover:text-slate-700"
+              aria-label="Close"
+              onClick={() => setIsFormOpen(false)}
+            >
+              <svg
+                viewBox="0 0 20 20"
+                className="h-5 w-5"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22z" />
+              </svg>
+            </button>
+            <p
+              id="form-title"
+              className="text-2xl font-semibold text-[#4D1895]"
+            >
+              New submission
+            </p>
+            <div className="mt-6 flex flex-col gap-4">
+              <div>
+                <label
+                  htmlFor="form-username"
+                  className="text-sm font-medium text-slate-700"
+                >
+                  Username
+                </label>
+                <input
+                  id="form-username"
+                  type="text"
+                  value={formUsername}
+                  onChange={(e) => setFormUsername(e.target.value)}
+                  placeholder="Your name"
+                  className="mt-1 w-full rounded-xl border border-black/10 bg-white px-4 py-2.5 text-sm text-slate-800 outline-none transition focus:border-[#4D1895] focus:ring-2 focus:ring-[#4D1895]/30"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="form-category"
+                  className="text-sm font-medium text-slate-700"
+                >
+                  Category
+                </label>
+                <div className="relative mt-1">
+                  <select
+                    id="form-category"
+                    value={formCategory}
+                    onChange={(e) =>
+                      setFormCategory(
+                        e.target.value as "feature" | "bug" | "review"
+                      )
+                    }
+                    className="w-full appearance-none rounded-xl border border-black/10 bg-white px-4 py-2.5 text-sm text-slate-800 outline-none transition focus:border-[#4D1895] focus:ring-2 focus:ring-[#4D1895]/30"
+                  >
+                    <option value="feature">Feature suggestion</option>
+                    <option value="bug">Bug report</option>
+                    <option value="review">Review</option>
+                  </select>
+                  <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-slate-400">
+                    <svg
+                      viewBox="0 0 20 20"
+                      className="h-4 w-4"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.06l3.71-3.83a.75.75 0 1 1 1.08 1.04l-4.25 4.39a.75.75 0 0 1-1.08 0L5.21 8.27a.75.75 0 0 1 .02-1.06z" />
+                    </svg>
+                  </span>
+                </div>
+              </div>
+              <div>
+                <label
+                  htmlFor="form-message"
+                  className="text-sm font-medium text-slate-700"
+                >
+                  Message
+                </label>
+                <textarea
+                  id="form-message"
+                  rows={4}
+                  value={formMessage}
+                  onChange={(e) => setFormMessage(e.target.value)}
+                  placeholder="Describe your suggestion, review, or bug..."
+                  className="mt-1 w-full resize-none rounded-xl border border-black/10 bg-white px-4 py-2.5 text-sm text-slate-800 outline-none transition focus:border-[#4D1895] focus:ring-2 focus:ring-[#4D1895]/30"
+                />
+              </div>
+              <button
+                type="button"
+                onClick={handleSubmit}
+                className="mt-2 w-full cursor-pointer rounded-full bg-[#4D1895] py-3 text-sm font-semibold text-white transition-colors hover:bg-[#3C1374]"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
       {isComingSoonOpen ? (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4"
