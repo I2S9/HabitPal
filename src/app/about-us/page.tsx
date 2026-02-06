@@ -287,7 +287,7 @@ export default function AboutUsPage() {
                 Copyright 2026, All rights reserved
               </p>
             </div>
-            <div className="grid gap-8 sm:grid-cols-2">
+            <div className="grid gap-8 sm:grid-cols-3">
               <div className="flex flex-col gap-3">
                 <p className="text-sm font-semibold uppercase tracking-wide text-white/90">
                   Legal
@@ -303,6 +303,23 @@ export default function AboutUsPage() {
                   href="/terms-of-use"
                 >
                   Terms of use
+                </a>
+              </div>
+              <div className="flex flex-col gap-3">
+                <p className="text-sm font-semibold uppercase tracking-wide text-white/90">
+                  Feedback
+                </p>
+                <a
+                  className="text-sm text-white/80 transition-colors hover:text-white hover:underline"
+                  href="/habitpal-suggestions"
+                >
+                  Suggest a feature
+                </a>
+                <a
+                  className="text-sm text-white/80 transition-colors hover:text-white hover:underline"
+                  href="/habitpal-suggestions"
+                >
+                  Report a bug
                 </a>
               </div>
               <div className="flex flex-col gap-3">

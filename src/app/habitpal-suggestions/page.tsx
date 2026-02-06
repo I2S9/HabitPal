@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function PrivacyPolicyPage() {
+export default function HabitPalSuggestionsPage() {
   const [isComingSoonOpen, setIsComingSoonOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -182,167 +182,106 @@ export default function PrivacyPolicyPage() {
           </div>
         ) : null}
       </header>
-      <main className="flex-1 px-4 pb-16 pt-10 sm:px-6 lg:px-8">
-        <section className="mx-auto w-full max-w-6xl">
+      <main className="flex flex-1 px-4 pb-16 pt-10 sm:px-6 lg:px-8">
+        <section className="mx-auto flex w-full max-w-6xl flex-1 flex-col">
           <h1 className="text-4xl font-semibold text-[#4D1895] sm:text-5xl">
-            Privacy Policy
+            HabitPal suggestions
           </h1>
           <div className="mt-6 space-y-6 text-justify text-sm leading-7 text-slate-700 sm:text-base">
             <p>
-              This Privacy Policy explains how HabitPal collects, uses, and
-              protects information when you use the HabitPal mobile application
-              and related services. It is designed to be clear, complete, and
-              compliant with Apple App Store requirements as well as applicable
-              privacy laws.
+              We welcome feature ideas, improvement suggestions, and bug reports
+              to make HabitPal better for everyone.
             </p>
-            <div>
-              <h2 className="text-lg font-semibold text-[#4D1895]">
-                1. App Overview
-              </h2>
-              <p className="mt-2">
-                HabitPal is a habit-building and personal development app for
-                iOS (built with React Native / Expo). It helps users create and
-                track habits, define long-term goals, plan daily schedules in a
-                calendar, view analytics and insights, write journal entries,
-                chat with an AI companion for reflection, and store positive
-                memories in a Cookie Jar. The app focuses on well-being,
-                productivity, self-improvement, and reflection.
-              </p>
+            <div className="flex flex-col gap-3 text-sm sm:flex-row sm:flex-wrap sm:items-center">
+              <div className="relative w-full min-w-0 sm:flex-1">
+                <label className="sr-only" htmlFor="suggestions-search">
+                  Search suggestions
+                </label>
+                <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
+                  <svg
+                    viewBox="0 0 20 20"
+                    className="h-4 w-4"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M12.9 14.32a7.5 7.5 0 1 1 1.41-1.41l3.39 3.38a1 1 0 0 1-1.42 1.42l-3.38-3.39zM8.5 14.5a6 6 0 1 0 0-12 6 6 0 0 0 0 12z" />
+                  </svg>
+                </span>
+                <input
+                  id="suggestions-search"
+                  type="text"
+                  placeholder="Search suggestions"
+                  className="w-full rounded-full border border-black/10 bg-white px-11 py-2.5 text-sm text-slate-800 outline-none transition focus:border-[#4D1895] focus:ring-2 focus:ring-[#4D1895]/30"
+                />
+              </div>
+              <div className="relative w-full sm:w-44">
+                <label className="sr-only" htmlFor="suggestions-type">
+                  Filter type
+                </label>
+                <select
+                  id="suggestions-type"
+                  className="w-full appearance-none rounded-full border border-black/10 bg-white px-4 py-2.5 text-sm text-slate-800 outline-none transition focus:border-[#4D1895] focus:ring-2 focus:ring-[#4D1895]/30"
+                  defaultValue="all"
+                >
+                  <option value="all">All types</option>
+                  <option value="feature">Features</option>
+                  <option value="bug">Bugs</option>
+                </select>
+                <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-slate-400">
+                  <svg
+                    viewBox="0 0 20 20"
+                    className="h-4 w-4"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.06l3.71-3.83a.75.75 0 1 1 1.08 1.04l-4.25 4.39a.75.75 0 0 1-1.08 0L5.21 8.27a.75.75 0 0 1 .02-1.06z" />
+                  </svg>
+                </span>
+              </div>
+              <div className="relative w-full sm:w-48">
+                <label className="sr-only" htmlFor="suggestions-sort">
+                  Sort suggestions
+                </label>
+                <select
+                  id="suggestions-sort"
+                  className="w-full appearance-none rounded-full border border-black/10 bg-white px-4 py-2.5 text-sm text-slate-800 outline-none transition focus:border-[#4D1895] focus:ring-2 focus:ring-[#4D1895]/30"
+                  defaultValue="date"
+                >
+                  <option value="date">Sort by date</option>
+                  <option value="rating">Sort by rating</option>
+                  <option value="alphabetical">Sort A to Z</option>
+                </select>
+                <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-slate-400">
+                  <svg
+                    viewBox="0 0 20 20"
+                    className="h-4 w-4"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.06l3.71-3.83a.75.75 0 1 1 1.08 1.04l-4.25 4.39a.75.75 0 0 1-1.08 0L5.21 8.27a.75.75 0 0 1 .02-1.06z" />
+                  </svg>
+                </span>
+              </div>
+              <button
+                type="button"
+                className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-[#4D1895] text-white transition-colors hover:bg-[#3C1374]"
+                aria-label="Add a suggestion"
+                title="Add a suggestion"
+              >
+                <svg
+                  viewBox="0 0 20 20"
+                  className="h-5 w-5"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M10 4a1 1 0 0 1 1 1v4h4a1 1 0 1 1 0 2h-4v4a1 1 0 1 1-2 0v-4H5a1 1 0 1 1 0-2h4V5a1 1 0 0 1 1-1z" />
+                </svg>
+              </button>
             </div>
-            <div>
-              <h2 className="text-lg font-semibold text-[#4D1895]">
-                2. Information We Collect
-              </h2>
-              <p className="mt-2">
-                We collect only the information necessary to provide and
-                improve HabitPal. Depending on how you use the app, we may
-                collect:
-              </p>
-              <p className="mt-2">
-                Account information such as email address and username, user-
-                generated content you create (habits, goals, journal entries,
-                calendar events, reflections, and Cookie Jar items), AI chat
-                messages submitted to generate responses, usage data about
-                interactions with features, device data such as OS version and
-                app version, and analytics, crash, and performance data to
-                improve stability.
-              </p>
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-[#4D1895]">
-                3. How We Use Information
-              </h2>
-              <p className="mt-2">
-                We use information to provide app functionality, personalize
-                your experience, maintain your account, sync your
-                data across devices, provide AI chat responses, improve
-                features, monitor reliability, and comply with legal
-                obligations. We do not use your personal data for advertising
-                profiling or marketing without consent.
-              </p>
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-[#4D1895]">
-                4. Sensitive and Personal Data
-              </h2>
-              <p className="mt-2">
-                Journal entries, reflections, and AI chat conversations are
-                treated as private content. We do not sell personal data. We do
-                not track you across apps or websites, and we do not use your
-                data for targeted advertising.
-              </p>
-              <p className="mt-2">
-                If you use AI features, your messages may be processed by an AI
-                service to generate responses. These messages are used only to
-                provide the feature, not to sell or advertise. AI responses are
-                informational and do not replace medical, psychological, or
-                professional advice.
-              </p>
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-[#4D1895]">
-                5. Data Sharing and Third-Party Services
-              </h2>
-              <p className="mt-2">
-                We may use third-party services to operate HabitPal, such as
-                analytics providers (for example, Firebase or Amplitude), cloud
-                hosting or databases, AI service providers for generating
-                responses, and crash reporting tools. Information shared is
-                limited to what is required for these services to function and
-                improve the app. These providers are governed by their own
-                privacy policies.
-              </p>
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-[#4D1895]">
-                6. Legal Bases and Your Rights
-              </h2>
-              <p className="mt-2">
-                For users in the European Economic Area and the United Kingdom,
-                we process personal data based on consent, contract performance,
-                legitimate interests in improving the app, and legal
-                obligations (as applicable). You have rights to access,
-                correct, delete, or export your data, and to withdraw consent
-                at any time.
-              </p>
-              <p className="mt-2">
-                For California residents, we comply with the CCPA/CPRA. You
-                have the right to know what personal information we collect, to
-                request deletion, to correct inaccurate information, to opt out
-                of sale or sharing of personal information (we do not sell or
-                share for advertising), and to receive data in a portable
-                format.
-              </p>
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-[#4D1895]">
-                7. Apple App Store Requirements
-              </h2>
-              <p className="mt-2">
-                HabitPal collects only data necessary for app functionality and
-                improvement. We do not engage in tracking without your consent,
-                and we will request App Tracking Transparency permission if
-                tracking is ever introduced. HabitPal is not directed to
-                children under 13, and we do not knowingly collect data from
-                children.
-              </p>
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-[#4D1895]">
-                8. Data Retention and Security
-              </h2>
-              <p className="mt-2">
-                We retain personal data only as long as necessary to provide the
-                service and meet legal requirements. We use reasonable security
-                measures, including encryption in transit and access controls,
-                to protect your data. If you delete your account, we will delete
-                or de-identify your personal data within a reasonable timeframe,
-                unless retention is required by law.
-              </p>
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-[#4D1895]">
-                9. Changes to This Policy
-              </h2>
-              <p className="mt-2">
-                We may update this Privacy Policy from time to time. If we make
-                material changes, we will notify you through the app or by other
-                reasonable means. The updated policy will be effective when
-                posted.
-              </p>
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-[#4D1895]">
-                10. Contact Information
-              </h2>
-              <p className="mt-2">Company/Publisher: HabitPal</p>
-              <p className="mt-2">Contact Email: contact@tryhabitpal.com</p>
-              <p className="mt-2">Country/Jurisdiction: France</p>
-              <p className="mt-2">
-                You can contact us to exercise your privacy rights or ask
-                questions about this policy.
-              </p>
-            </div>
+            <div
+              className="flex-1 rounded-3xl bg-white"
+              aria-hidden="true"
+            />
           </div>
         </section>
       </main>
