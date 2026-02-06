@@ -5,6 +5,7 @@ import { useState } from "react";
 export default function Home() {
   const [isComingSoonOpen, setIsComingSoonOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeFeature, setActiveFeature] = useState(0);
   const testimonialColumns = [
     [
       {
@@ -365,6 +366,84 @@ export default function Home() {
           </a>
         </div>
       </div>
+      <div className="mx-auto mt-10 max-w-3xl text-center">
+        <p className="text-3xl font-semibold leading-tight text-[#4D1895] sm:text-4xl">
+          What does{" "}
+          <span className="bg-linear-to-r from-[#E6B3F7] via-[#B55AF5] to-[#4D1895] bg-clip-text text-transparent">
+            HabitPal
+          </span>{" "}
+          include?
+        </p>
+      </div>
+      <section className="w-full px-4 pb-16 pt-10 sm:px-6 lg:px-8">
+        <div className="mx-auto w-full max-w-6xl">
+          <div className="mx-auto grid max-w-4xl items-start gap-6 lg:grid-cols-[auto_minmax(0,1fr)]">
+            <div className="flex items-start justify-center">
+              <img
+                src={`/assets/${
+                  [
+                    "habit.png",
+                    "insights.png",
+                    "calendar.png",
+                    "journal.png",
+                    "cookie-jar.png",
+                  ][activeFeature]
+                }`}
+                alt="HabitPal feature preview"
+                className="h-auto w-[300px]"
+              />
+            </div>
+            <div className="flex flex-col gap-3">
+              {[
+                {
+                  title: "Define dreams, not just tasks",
+                  text: "Set meaningful long-term goals with clear time horizons. Focus on what truly matters to you, at your own pace.",
+                },
+                {
+                  title: "Track habits without guilt or streak anxiety",
+                  text: "Flexible tracking designed to support, not punish. Miss a day? HabitPal helps you keep going with kindness.",
+                },
+                {
+                  title: "See your life clearly, not just streaks",
+                  text: "A calm calendar focused on insights, balance, and patterns. See how your habits fit into your life over time.",
+                },
+                {
+                  title: "Reflect freely in your private journal",
+                  text: "A private space to write about your thoughts and emotions. A gentle AI companion can help you reflect and find encouragement.",
+                },
+                {
+                  title: "Save your wins in the Cookie Jar",
+                  text: "Collect positive moments and small wins. On harder days, revisit them to remind yourself how far you've come.",
+                },
+              ].map((feature, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={() => setActiveFeature(index)}
+                  className={`w-full cursor-pointer rounded-2xl px-5 py-4 text-left transition-all ${
+                    activeFeature === index
+                      ? "bg-white"
+                      : "bg-white/50 hover:bg-white/70"
+                  }`}
+                >
+                  <p
+                    className={`text-base font-semibold sm:text-lg ${
+                      activeFeature === index
+                        ? "text-[#4D1895]"
+                        : "text-slate-800"
+                    }`}
+                  >
+                    {feature.title}
+                  </p>
+                  <p className="mt-1 text-sm leading-6 text-slate-600">
+                    {feature.text}
+                  </p>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
       <section
         className="w-full px-4 pb-10 pt-4 sm:px-6 lg:px-8"
         id="why-choose"
