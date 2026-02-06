@@ -284,7 +284,7 @@ export default function Home() {
         <section className="mx-auto grid w-full max-w-6xl items-center gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
           <div className="flex flex-col gap-6">
             <div className="inline-flex w-fit items-center gap-2 rounded-full border border-black/10 bg-white/70 px-4 py-2 text-sm text-slate-700">
-              <span className="font-medium">Loved by 5M users</span>
+              <span className="font-medium">Loved by 50 users</span>
               <span className="text-slate-500">with 4.9 rating</span>
             </div>
             <div className="space-y-4">
