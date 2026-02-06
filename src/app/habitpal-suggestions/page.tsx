@@ -182,12 +182,12 @@ export default function HabitPalSuggestionsPage() {
           </div>
         ) : null}
       </header>
-      <main className="flex flex-1 px-4 pb-16 pt-10 sm:px-6 lg:px-8">
+      <main className="flex flex-1 px-4 pt-10 sm:px-6 lg:px-8">
         <section className="mx-auto flex w-full max-w-6xl flex-1 flex-col">
           <h1 className="text-4xl font-semibold text-[#4D1895] sm:text-5xl">
             HabitPal suggestions
           </h1>
-          <div className="mt-6 space-y-6 text-justify text-sm leading-7 text-slate-700 sm:text-base">
+          <div className="mt-6 flex flex-1 flex-col gap-6 text-justify text-sm leading-7 text-slate-700 sm:text-base">
             <p>
               We welcome feature ideas, improvement suggestions, and bug reports
               to make HabitPal better for everyone.
@@ -278,14 +278,11 @@ export default function HabitPalSuggestionsPage() {
                 </svg>
               </button>
             </div>
-            <div
-              className="flex-1 rounded-3xl bg-white"
-              aria-hidden="true"
-            />
+            <div className="min-h-[300px] flex-1 rounded-3xl bg-white" />
           </div>
         </section>
       </main>
-      <footer className="w-full px-4 pb-10 sm:px-6 lg:px-8">
+      <footer className="w-full px-4 pb-10 pt-6 sm:px-6 lg:px-8">
         <div className="mx-auto w-full max-w-6xl rounded-3xl bg-[#4D1895] px-8 py-10 text-white">
           <div className="grid gap-10 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
             <div className="flex flex-col gap-6">
