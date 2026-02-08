@@ -420,9 +420,9 @@ export default function Home() {
                   key={index}
                   type="button"
                   onClick={() => setActiveFeature(index)}
-                  className={`w-full cursor-pointer rounded-2xl px-5 py-4 text-left transition-all ${
+                  className={`w-full cursor-pointer rounded-2xl px-5 py-4 text-left transition-all duration-300 ${
                     activeFeature === index
-                      ? "bg-white"
+                      ? "scale-[1.03] bg-white shadow-[0_4px_24px_rgba(77,24,149,0.18)]"
                       : "bg-white/50 hover:bg-white/70"
                   }`}
                 >
