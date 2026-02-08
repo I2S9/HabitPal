@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 type Submission = {
   id: number;
@@ -25,6 +25,28 @@ export default function HabitPalSuggestionsPage() {
   const [sortBy, setSortBy] = useState("date");
   const [searchQuery, setSearchQuery] = useState("");
   const [upvotedIds, setUpvotedIds] = useState<Set<number>>(new Set());
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [isSortOpen, setIsSortOpen] = useState(false);
+  const [isFormCategoryOpen, setIsFormCategoryOpen] = useState(false);
+  const filterRef = useRef<HTMLDivElement>(null);
+  const sortRef = useRef<HTMLDivElement>(null);
+  const formCategoryRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (filterRef.current && !filterRef.current.contains(e.target as Node))
+        setIsFilterOpen(false);
+      if (sortRef.current && !sortRef.current.contains(e.target as Node))
+        setIsSortOpen(false);
+      if (
+        formCategoryRef.current &&
+        !formCategoryRef.current.contains(e.target as Node)
+      )
+        setIsFormCategoryOpen(false);
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleSubmit = () => {
     if (!formUsername.trim() || !formMessage.trim()) return;
@@ -297,56 +319,104 @@ export default function HabitPalSuggestionsPage() {
                   className="w-full rounded-full border border-black/10 bg-white px-11 py-2.5 text-sm text-slate-800 outline-none transition focus:border-[#4D1895] focus:ring-2 focus:ring-[#4D1895]/30"
                 />
               </div>
-              <div className="relative w-full sm:w-44">
-                <label className="sr-only" htmlFor="suggestions-type">
-                  Filter type
-                </label>
-                <select
-                  id="suggestions-type"
-                  value={filterType}
-                  onChange={(e) => setFilterType(e.target.value)}
-                  className="w-full appearance-none rounded-full border border-black/10 bg-white px-4 py-2.5 text-sm text-slate-800 outline-none transition focus:border-[#4D1895] focus:ring-2 focus:ring-[#4D1895]/30"
+              <div className="relative w-full sm:w-44" ref={filterRef}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsFilterOpen(!isFilterOpen);
+                    setIsSortOpen(false);
+                  }}
+                  className={`flex w-full items-center justify-between rounded-full border bg-white px-4 py-2.5 text-sm text-slate-800 outline-none transition ${isFilterOpen ? "border-[#4D1895] ring-2 ring-[#4D1895]/30" : "border-black/10 hover:border-[#4D1895]/40"}`}
                 >
-                  <option value="all">All types</option>
-                  <option value="feature">Features</option>
-                  <option value="bug">Bugs</option>
-                  <option value="review">Reviews</option>
-                </select>
-                <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-slate-400">
+                  <span>
+                    {
+                      { all: "All types", feature: "Features", bug: "Bugs", review: "Reviews" }[filterType]
+                    }
+                  </span>
                   <svg
                     viewBox="0 0 20 20"
-                    className="h-4 w-4"
+                    className={`h-4 w-4 text-slate-400 transition-transform duration-200 ${isFilterOpen ? "rotate-180" : ""}`}
                     fill="currentColor"
                     aria-hidden="true"
                   >
                     <path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.06l3.71-3.83a.75.75 0 1 1 1.08 1.04l-4.25 4.39a.75.75 0 0 1-1.08 0L5.21 8.27a.75.75 0 0 1 .02-1.06z" />
                   </svg>
-                </span>
+                </button>
+                {isFilterOpen && (
+                  <div className="absolute left-0 z-50 mt-2 w-full overflow-hidden rounded-2xl border border-[#4D1895]/15 bg-white py-1 shadow-lg shadow-[#4D1895]/10">
+                    {[
+                      { value: "all", label: "All types" },
+                      { value: "feature", label: "Features" },
+                      { value: "bug", label: "Bugs" },
+                      { value: "review", label: "Reviews" },
+                    ].map((opt) => (
+                      <button
+                        key={opt.value}
+                        type="button"
+                        onClick={() => {
+                          setFilterType(opt.value);
+                          setIsFilterOpen(false);
+                        }}
+                        className={`flex w-full items-center px-4 py-2.5 text-left text-sm transition-colors ${
+                          filterType === opt.value
+                            ? "bg-[#4D1895]/10 font-medium text-[#4D1895]"
+                            : "text-slate-700 hover:bg-[#4D1895]/5 hover:text-[#4D1895]"
+                        }`}
+                      >
+                        {opt.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
-              <div className="relative w-full sm:w-48">
-                <label className="sr-only" htmlFor="suggestions-sort">
-                  Sort suggestions
-                </label>
-                <select
-                  id="suggestions-sort"
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="w-full appearance-none rounded-full border border-black/10 bg-white px-4 py-2.5 text-sm text-slate-800 outline-none transition focus:border-[#4D1895] focus:ring-2 focus:ring-[#4D1895]/30"
+              <div className="relative w-full sm:w-48" ref={sortRef}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsSortOpen(!isSortOpen);
+                    setIsFilterOpen(false);
+                  }}
+                  className={`flex w-full items-center justify-between rounded-full border bg-white px-4 py-2.5 text-sm text-slate-800 outline-none transition ${isSortOpen ? "border-[#4D1895] ring-2 ring-[#4D1895]/30" : "border-black/10 hover:border-[#4D1895]/40"}`}
                 >
-                  <option value="date">Sort by date</option>
-                  <option value="rating">Sort by rating</option>
-                  <option value="alphabetical">Sort A to Z</option>
-                </select>
-                <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-slate-400">
+                  <span>
+                    {
+                      { date: "Sort by date", rating: "Sort by rating", alphabetical: "Sort A to Z" }[sortBy]
+                    }
+                  </span>
                   <svg
                     viewBox="0 0 20 20"
-                    className="h-4 w-4"
+                    className={`h-4 w-4 text-slate-400 transition-transform duration-200 ${isSortOpen ? "rotate-180" : ""}`}
                     fill="currentColor"
                     aria-hidden="true"
                   >
                     <path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.06l3.71-3.83a.75.75 0 1 1 1.08 1.04l-4.25 4.39a.75.75 0 0 1-1.08 0L5.21 8.27a.75.75 0 0 1 .02-1.06z" />
                   </svg>
-                </span>
+                </button>
+                {isSortOpen && (
+                  <div className="absolute left-0 z-50 mt-2 w-full overflow-hidden rounded-2xl border border-[#4D1895]/15 bg-white py-1 shadow-lg shadow-[#4D1895]/10">
+                    {[
+                      { value: "date", label: "Sort by date" },
+                      { value: "rating", label: "Sort by rating" },
+                      { value: "alphabetical", label: "Sort A to Z" },
+                    ].map((opt) => (
+                      <button
+                        key={opt.value}
+                        type="button"
+                        onClick={() => {
+                          setSortBy(opt.value);
+                          setIsSortOpen(false);
+                        }}
+                        className={`flex w-full items-center px-4 py-2.5 text-left text-sm transition-colors ${
+                          sortBy === opt.value
+                            ? "bg-[#4D1895]/10 font-medium text-[#4D1895]"
+                            : "text-slate-700 hover:bg-[#4D1895]/5 hover:text-[#4D1895]"
+                        }`}
+                      >
+                        {opt.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
               <button
                 type="button"
@@ -570,31 +640,51 @@ export default function HabitPalSuggestionsPage() {
                 >
                   Category
                 </label>
-                <div className="relative mt-1">
-                  <select
-                    id="form-category"
-                    value={formCategory}
-                    onChange={(e) =>
-                      setFormCategory(
-                        e.target.value as "feature" | "bug" | "review"
-                      )
-                    }
-                    className="w-full appearance-none rounded-xl border border-black/10 bg-white px-4 py-2.5 text-sm text-slate-800 outline-none transition focus:border-[#4D1895] focus:ring-2 focus:ring-[#4D1895]/30"
+                <div className="relative mt-1" ref={formCategoryRef}>
+                  <button
+                    type="button"
+                    onClick={() => setIsFormCategoryOpen(!isFormCategoryOpen)}
+                    className={`flex w-full items-center justify-between rounded-xl border bg-white px-4 py-2.5 text-sm text-slate-800 outline-none transition ${isFormCategoryOpen ? "border-[#4D1895] ring-2 ring-[#4D1895]/30" : "border-black/10 hover:border-[#4D1895]/40"}`}
                   >
-                    <option value="feature">Feature suggestion</option>
-                    <option value="bug">Bug report</option>
-                    <option value="review">Review</option>
-                  </select>
-                  <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-slate-400">
+                    <span>
+                      {
+                        { feature: "Feature suggestion", bug: "Bug report", review: "Review" }[formCategory]
+                      }
+                    </span>
                     <svg
                       viewBox="0 0 20 20"
-                      className="h-4 w-4"
+                      className={`h-4 w-4 text-slate-400 transition-transform duration-200 ${isFormCategoryOpen ? "rotate-180" : ""}`}
                       fill="currentColor"
                       aria-hidden="true"
                     >
                       <path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.06l3.71-3.83a.75.75 0 1 1 1.08 1.04l-4.25 4.39a.75.75 0 0 1-1.08 0L5.21 8.27a.75.75 0 0 1 .02-1.06z" />
                     </svg>
-                  </span>
+                  </button>
+                  {isFormCategoryOpen && (
+                    <div className="absolute left-0 z-50 mt-2 w-full overflow-hidden rounded-2xl border border-[#4D1895]/15 bg-white py-1 shadow-lg shadow-[#4D1895]/10">
+                      {[
+                        { value: "feature" as const, label: "Feature suggestion" },
+                        { value: "bug" as const, label: "Bug report" },
+                        { value: "review" as const, label: "Review" },
+                      ].map((opt) => (
+                        <button
+                          key={opt.value}
+                          type="button"
+                          onClick={() => {
+                            setFormCategory(opt.value);
+                            setIsFormCategoryOpen(false);
+                          }}
+                          className={`flex w-full items-center px-4 py-2.5 text-left text-sm transition-colors ${
+                            formCategory === opt.value
+                              ? "bg-[#4D1895]/10 font-medium text-[#4D1895]"
+                              : "text-slate-700 hover:bg-[#4D1895]/5 hover:text-[#4D1895]"
+                          }`}
+                        >
+                          {opt.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
               <div>
