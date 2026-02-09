@@ -1,16 +1,26 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
+import { createClient } from "@/utils/supabase/client";
 
 type Submission = {
   id: number;
   username: string;
   category: "feature" | "bug" | "review";
   message: string;
-  date: string;
+  rating: number | null;
   upvotes: number;
-  rating?: number;
+  created_at: string;
 };
+
+const supabase = createClient();
+
+const formatDate = (iso: string) =>
+  new Date(iso).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
 
 export default function HabitPalSuggestionsPage() {
   const [isComingSoonOpen, setIsComingSoonOpen] = useState(false);
@@ -30,9 +40,29 @@ export default function HabitPalSuggestionsPage() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isSortOpen, setIsSortOpen] = useState(false);
   const [isFormCategoryOpen, setIsFormCategoryOpen] = useState(false);
+
+  // Admin password popup state
+  const [solveTargetId, setSolveTargetId] = useState<number | null>(null);
+  const [adminPassword, setAdminPassword] = useState("");
+  const [solveError, setSolveError] = useState("");
+  const [isSolving, setIsSolving] = useState(false);
+
   const filterRef = useRef<HTMLDivElement>(null);
   const sortRef = useRef<HTMLDivElement>(null);
   const formCategoryRef = useRef<HTMLDivElement>(null);
+
+  // ── Fetch suggestions from Supabase ──────────────────────
+  const fetchSuggestions = useCallback(async () => {
+    const { data, error } = await supabase
+      .from("suggestions")
+      .select("*")
+      .order("created_at", { ascending: false });
+    if (!error && data) setSubmissions(data as Submission[]);
+  }, []);
+
+  useEffect(() => {
+    fetchSuggestions();
+  }, [fetchSuggestions]);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -50,44 +80,88 @@ export default function HabitPalSuggestionsPage() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleSubmit = () => {
+  // ── Submit a new suggestion ──────────────────────────────
+  const handleSubmit = async () => {
     if (!formUsername.trim() || !formMessage.trim()) return;
     if (formCategory === "review" && formRating === 0) return;
-    const now = new Date();
-    const dateStr = now.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
-    const newSubmission: Submission = {
-      id: Date.now(),
+
+    const { error } = await supabase.from("suggestions").insert({
       username: formUsername.trim(),
       category: formCategory,
       message: formMessage.trim(),
-      date: dateStr,
-      upvotes: 0,
-      ...(formCategory === "review" ? { rating: formRating } : {}),
-    };
-    setSubmissions((prev) => [newSubmission, ...prev]);
-    setFormUsername("");
-    setFormMessage("");
-    setFormCategory("feature");
-    setFormRating(0);
-    setIsFormOpen(false);
+      rating: formCategory === "review" ? formRating : null,
+    });
+
+    if (!error) {
+      await fetchSuggestions();
+      setFormUsername("");
+      setFormMessage("");
+      setFormCategory("feature");
+      setFormRating(0);
+      setIsFormOpen(false);
+    }
   };
 
-  const handleSolved = (id: number) => {
-    setSubmissions((prev) => prev.filter((s) => s.id !== id));
+  // ── Admin: open password popup ───────────────────────────
+  const handleSolvedClick = (id: number) => {
+    setSolveTargetId(id);
+    setAdminPassword("");
+    setSolveError("");
   };
 
-  const handleUpvote = (id: number) => {
+  // ── Admin: confirm deletion with password ────────────────
+  const handleSolvedConfirm = async () => {
+    if (!solveTargetId || !adminPassword) return;
+    setIsSolving(true);
+    setSolveError("");
+
+    const { data, error } = await supabase.rpc("delete_suggestion", {
+      suggestion_id: solveTargetId,
+      admin_password: adminPassword,
+    });
+
+    if (error) {
+      setSolveError(error.message || "An error occurred. Please try again.");
+      setIsSolving(false);
+      return;
+    }
+
+    if (data && typeof data === "object" && "success" in data) {
+      const result = data as { success: boolean; error?: string };
+      if (!result.success) {
+        setSolveError(result.error || "Invalid password");
+        setIsSolving(false);
+        return;
+      }
+    }
+
+    // Success — close popup and refresh
+    setSolveTargetId(null);
+    setAdminPassword("");
+    setIsSolving(false);
+    await fetchSuggestions();
+  };
+
+  // ── Upvote ───────────────────────────────────────────────
+  const handleUpvote = async (id: number) => {
     if (upvotedIds.has(id)) return;
-    setUpvotedIds((prev) => new Set(prev).add(id));
-    setSubmissions((prev) =>
-      prev.map((s) => (s.id === id ? { ...s, upvotes: s.upvotes + 1 } : s))
-    );
+    const submission = submissions.find((s) => s.id === id);
+    if (!submission) return;
+
+    const { error } = await supabase
+      .from("suggestions")
+      .update({ upvotes: submission.upvotes + 1 })
+      .eq("id", id);
+
+    if (!error) {
+      setUpvotedIds((prev) => new Set(prev).add(id));
+      setSubmissions((prev) =>
+        prev.map((s) => (s.id === id ? { ...s, upvotes: s.upvotes + 1 } : s))
+      );
+    }
   };
 
+  // ── Helpers ──────────────────────────────────────────────
   const categoryLabel = (cat: string) => {
     if (cat === "feature") return "Feature";
     if (cat === "bug") return "Bug";
@@ -115,7 +189,7 @@ export default function HabitPalSuggestionsPage() {
       if (sortBy === "rating") return b.upvotes - a.upvotes;
       if (sortBy === "alphabetical")
         return a.message.localeCompare(b.message);
-      return b.id - a.id;
+      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
     });
 
   return (
@@ -465,7 +539,9 @@ export default function HabitPalSuggestionsPage() {
                         >
                           {categoryLabel(s.category)}
                         </span>
-                        <span className="text-xs text-slate-400">{s.date}</span>
+                        <span className="text-xs text-slate-400">
+                          {formatDate(s.created_at)}
+                        </span>
                       </div>
                       <p className="mt-2 text-sm leading-6 text-slate-700">
                         {s.message}
@@ -515,8 +591,8 @@ export default function HabitPalSuggestionsPage() {
                       </button>
                       <button
                         type="button"
-                        onClick={() => handleSolved(s.id)}
-                        className="flex cursor-pointer flex-col items-center gap-0.5 rounded-xl bg-emerald-100 px-3 py-2 text-xs font-medium text-emerald-600 transition-colors hover:bg-emerald-200 hover:text-emerald-700"
+                        onClick={() => handleSolvedClick(s.id)}
+                        className="flex cursor-pointer flex-col items-center gap-0.5 rounded-xl bg-[#DCCAE5] px-3 py-2 text-xs font-medium text-[#4D1895] transition-colors hover:bg-[#cbb8d9]"
                         aria-label="Mark as solved"
                         title="Mark as solved"
                       >
@@ -640,6 +716,8 @@ export default function HabitPalSuggestionsPage() {
           </div>
         </div>
       </footer>
+
+      {/* ── New submission popup ─────────────────────────── */}
       {isFormOpen ? (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4"
@@ -800,6 +878,85 @@ export default function HabitPalSuggestionsPage() {
           </div>
         </div>
       ) : null}
+
+      {/* ── Admin password popup (Solved) ────────────────── */}
+      {solveTargetId !== null ? (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="solve-title"
+        >
+          <div className="relative w-full max-w-sm rounded-3xl bg-white px-8 py-10">
+            <button
+              type="button"
+              className="absolute right-6 top-4 text-slate-500 transition-colors hover:text-slate-700"
+              aria-label="Close"
+              onClick={() => {
+                setSolveTargetId(null);
+                setAdminPassword("");
+                setSolveError("");
+              }}
+            >
+              <svg
+                viewBox="0 0 20 20"
+                className="h-5 w-5"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22z" />
+              </svg>
+            </button>
+            <p
+              id="solve-title"
+              className="text-xl font-semibold text-[#4D1895]"
+            >
+              Admin verification
+            </p>
+            <p className="mt-2 text-sm text-slate-500">
+              Enter the admin password to remove this submission.
+            </p>
+            <div className="mt-6 flex flex-col gap-4">
+              <div>
+                <label
+                  htmlFor="admin-password"
+                  className="text-sm font-medium text-slate-700"
+                >
+                  Password
+                </label>
+                <input
+                  id="admin-password"
+                  type="password"
+                  value={adminPassword}
+                  onChange={(e) => {
+                    setAdminPassword(e.target.value);
+                    setSolveError("");
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleSolvedConfirm();
+                  }}
+                  placeholder="Enter admin password"
+                  autoFocus
+                  className="mt-1 w-full rounded-xl border border-black/10 bg-white px-4 py-2.5 text-sm text-slate-800 outline-none transition focus:border-[#4D1895] focus:ring-2 focus:ring-[#4D1895]/30"
+                />
+              </div>
+              {solveError && (
+                <p className="text-sm font-medium text-red-500">{solveError}</p>
+              )}
+              <button
+                type="button"
+                onClick={handleSolvedConfirm}
+                disabled={isSolving || !adminPassword}
+                className="mt-1 w-full cursor-pointer rounded-full bg-[#4D1895] py-3 text-sm font-semibold text-white transition-colors hover:bg-[#3C1374] disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {isSolving ? "Verifying..." : "Confirm removal"}
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
+      {/* ── Coming soon popup ────────────────────────────── */}
       {isComingSoonOpen ? (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4"
