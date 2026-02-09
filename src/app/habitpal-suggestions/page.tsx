@@ -9,6 +9,7 @@ type Submission = {
   message: string;
   date: string;
   upvotes: number;
+  rating?: number;
 };
 
 export default function HabitPalSuggestionsPage() {
@@ -24,6 +25,7 @@ export default function HabitPalSuggestionsPage() {
   const [filterType, setFilterType] = useState("all");
   const [sortBy, setSortBy] = useState("date");
   const [searchQuery, setSearchQuery] = useState("");
+  const [formRating, setFormRating] = useState(0);
   const [upvotedIds, setUpvotedIds] = useState<Set<number>>(new Set());
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isSortOpen, setIsSortOpen] = useState(false);
@@ -50,6 +52,7 @@ export default function HabitPalSuggestionsPage() {
 
   const handleSubmit = () => {
     if (!formUsername.trim() || !formMessage.trim()) return;
+    if (formCategory === "review" && formRating === 0) return;
     const now = new Date();
     const dateStr = now.toLocaleDateString("en-US", {
       year: "numeric",
@@ -63,12 +66,18 @@ export default function HabitPalSuggestionsPage() {
       message: formMessage.trim(),
       date: dateStr,
       upvotes: 0,
+      ...(formCategory === "review" ? { rating: formRating } : {}),
     };
     setSubmissions((prev) => [newSubmission, ...prev]);
     setFormUsername("");
     setFormMessage("");
     setFormCategory("feature");
+    setFormRating(0);
     setIsFormOpen(false);
+  };
+
+  const handleSolved = (id: number) => {
+    setSubmissions((prev) => prev.filter((s) => s.id !== id));
   };
 
   const handleUpvote = (id: number) => {
@@ -461,27 +470,71 @@ export default function HabitPalSuggestionsPage() {
                       <p className="mt-2 text-sm leading-6 text-slate-700">
                         {s.message}
                       </p>
+                      {s.category === "review" && s.rating && (
+                        <div className="mt-2 flex items-center gap-0.5">
+                          {[1, 2, 3, 4, 5].map((star) => (
+                            <svg
+                              key={star}
+                              viewBox="0 0 24 24"
+                              className="h-4 w-4"
+                              fill={star <= s.rating! ? "#FACC15" : "none"}
+                              stroke={star <= s.rating! ? "#FACC15" : "#cbd5e1"}
+                              strokeWidth="1.5"
+                              aria-hidden="true"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5z"
+                              />
+                            </svg>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                    <button
-                      type="button"
-                      onClick={() => handleUpvote(s.id)}
-                      className={`flex shrink-0 flex-col items-center gap-0.5 rounded-xl px-3 py-2 text-xs font-medium transition-colors ${
-                        upvotedIds.has(s.id)
-                          ? "bg-[#4D1895] text-white"
-                          : "cursor-pointer bg-[#DCCAE5] text-[#4D1895] hover:bg-[#cbb8d9]"
-                      }`}
-                      aria-label={`Upvote (${s.upvotes})`}
-                    >
-                      <svg
-                        viewBox="0 0 20 20"
-                        className="h-4 w-4"
-                        fill="currentColor"
-                        aria-hidden="true"
+                    <div className="flex shrink-0 items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => handleUpvote(s.id)}
+                        className={`flex flex-col items-center gap-0.5 rounded-xl px-3 py-2 text-xs font-medium transition-colors ${
+                          upvotedIds.has(s.id)
+                            ? "bg-[#4D1895] text-white"
+                            : "cursor-pointer bg-[#DCCAE5] text-[#4D1895] hover:bg-[#cbb8d9]"
+                        }`}
+                        aria-label={`Upvote (${s.upvotes})`}
                       >
-                        <path d="M10 5.83l-4.29 4.3a1 1 0 0 1-1.42-1.42l5-5a1 1 0 0 1 1.42 0l5 5a1 1 0 0 1-1.42 1.42L10 5.83z" />
-                      </svg>
-                      <span>{s.upvotes}</span>
-                    </button>
+                        <svg
+                          viewBox="0 0 20 20"
+                          className="h-4 w-4"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path d="M10 5.83l-4.29 4.3a1 1 0 0 1-1.42-1.42l5-5a1 1 0 0 1 1.42 0l5 5a1 1 0 0 1-1.42 1.42L10 5.83z" />
+                        </svg>
+                        <span>{s.upvotes}</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleSolved(s.id)}
+                        className="flex cursor-pointer flex-col items-center gap-0.5 rounded-xl bg-emerald-100 px-3 py-2 text-xs font-medium text-emerald-600 transition-colors hover:bg-emerald-200 hover:text-emerald-700"
+                        aria-label="Mark as solved"
+                        title="Mark as solved"
+                      >
+                        <svg
+                          viewBox="0 0 20 20"
+                          className="h-4 w-4"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        <span>Solved</span>
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -687,6 +740,39 @@ export default function HabitPalSuggestionsPage() {
                   )}
                 </div>
               </div>
+              {formCategory === "review" && (
+                <div>
+                  <label className="text-sm font-medium text-slate-700">
+                    Rating
+                  </label>
+                  <div className="mt-1 flex items-center gap-1">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <button
+                        key={star}
+                        type="button"
+                        onClick={() => setFormRating(star)}
+                        className="cursor-pointer p-0.5 transition-transform hover:scale-110"
+                        aria-label={`Rate ${star} star${star > 1 ? "s" : ""}`}
+                      >
+                        <svg
+                          viewBox="0 0 24 24"
+                          className="h-7 w-7"
+                          fill={star <= formRating ? "#FACC15" : "none"}
+                          stroke={star <= formRating ? "#FACC15" : "#94a3b8"}
+                          strokeWidth="1.5"
+                          aria-hidden="true"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5z"
+                          />
+                        </svg>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
               <div>
                 <label
                   htmlFor="form-message"
