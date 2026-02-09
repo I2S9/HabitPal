@@ -355,6 +355,31 @@ export default function Home() {
             </span>
           </p>
         </div>
+        <div className="mx-auto mt-14 w-full max-w-4xl">
+          <div className="flex items-end justify-center gap-5 sm:gap-7 lg:gap-10">
+            <div className="w-[28%] shrink-0 -rotate-6 transform transition-transform duration-500 hover:-rotate-2">
+              <img
+                src="/assets/understand-your-progress.png"
+                alt="Understand your progress"
+                className="h-auto w-full rounded-2xl shadow-lg sm:rounded-3xl"
+              />
+            </div>
+            <div className="z-10 w-[30%] shrink-0 scale-105 transform">
+              <img
+                src="/assets/your-dreams.png"
+                alt="Your dreams, clearly defined"
+                className="h-auto w-full rounded-2xl shadow-xl sm:rounded-3xl"
+              />
+            </div>
+            <div className="w-[28%] shrink-0 rotate-6 transform transition-transform duration-500 hover:rotate-2">
+              <img
+                src="/assets/private-space.png"
+                alt="A private space for your thoughts"
+                className="h-auto w-full rounded-2xl shadow-lg sm:rounded-3xl"
+              />
+            </div>
+          </div>
+        </div>
       </main>
       <div className="w-full px-4 pb-2 sm:px-6 lg:px-8">
         <div className="mx-auto flex w-full max-w-6xl justify-center">
