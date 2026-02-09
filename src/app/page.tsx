@@ -386,6 +386,10 @@ export default function Home() {
           <a
             href="#"
             className="rounded-full bg-[#4D1895] px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#3C1374] sm:px-8 sm:text-base"
+            onClick={(event) => {
+              event.preventDefault();
+              setIsComingSoonOpen(true);
+            }}
           >
             Turn big dreams into action
           </a>
