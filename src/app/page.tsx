@@ -357,7 +357,7 @@ export default function Home() {
         </div>
         <div className="mx-auto mt-14 w-full max-w-4xl">
           <div className="flex items-end justify-center gap-5 sm:gap-7 lg:gap-10">
-            <div className="w-[28%] shrink-0 -rotate-6 transform transition-transform duration-500 hover:-rotate-2">
+            <div className="w-[28%] shrink-0 -rotate-6 transform">
               <img
                 src="/assets/understand-your-progress.png"
                 alt="Understand your progress"
@@ -371,7 +371,7 @@ export default function Home() {
                 className="h-auto w-full rounded-2xl shadow-xl sm:rounded-3xl"
               />
             </div>
-            <div className="w-[28%] shrink-0 rotate-6 transform transition-transform duration-500 hover:rotate-2">
+            <div className="w-[28%] shrink-0 rotate-6 transform">
               <img
                 src="/assets/private-space.png"
                 alt="A private space for your thoughts"
