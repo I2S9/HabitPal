@@ -592,7 +592,7 @@ export default function HabitPalSuggestionsPage() {
                       <button
                         type="button"
                         onClick={() => handleSolvedClick(s.id)}
-                        className="flex cursor-pointer flex-col items-center gap-0.5 rounded-xl bg-[#DCCAE5] px-3 py-2 text-xs font-medium text-[#4D1895] transition-colors hover:bg-[#cbb8d9]"
+                        className="flex cursor-pointer flex-col items-center gap-0.5 rounded-xl bg-gray-100 px-3 py-2 text-xs font-medium text-gray-500 transition-colors hover:bg-gray-200 hover:text-gray-600"
                         aria-label="Mark as solved"
                         title="Mark as solved"
                       >
