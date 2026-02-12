@@ -134,7 +134,7 @@ export default function Home() {
             </span>
           </a>
           <div className="hidden flex-wrap items-center justify-center gap-3 text-sm font-medium text-slate-800 md:flex md:gap-6 md:text-lg md:justify-self-center">
-            <a className="transition-colors hover:text-slate-950" href="#">
+            <a className="transition-colors hover:text-slate-950" href="#features">
               Features
             </a>
             <a
@@ -216,7 +216,7 @@ export default function Home() {
             <div className="flex flex-col items-center gap-3 text-sm font-medium text-slate-800">
               <a
                 className="transition-colors hover:text-slate-950"
-                href="#"
+                href="#features"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Features
@@ -421,7 +421,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <div className="mx-auto mt-10 max-w-3xl text-center">
+      <div className="mx-auto mt-10 max-w-3xl scroll-mt-28 text-center" id="features">
         <p className="text-3xl font-semibold leading-tight text-[#4D1895] sm:text-4xl">
           What does{" "}
           <span className="bg-linear-to-r from-[#E6B3F7] via-[#B55AF5] to-[#4D1895] bg-clip-text text-transparent">
