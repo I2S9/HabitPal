@@ -395,6 +395,32 @@ export default function Home() {
           </a>
         </div>
       </div>
+      <section className="w-full px-4 pt-16 pb-10 sm:px-6 lg:px-8">
+        <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-8 md:flex-row md:gap-12">
+          <div className="w-full shrink-0 md:w-[45%]">
+            <img
+              src="/assets/long-term-goals.png"
+              alt="Long term goals illustration"
+              className="h-auto w-full rounded-2xl"
+            />
+          </div>
+          <div className="flex flex-col gap-3">
+            <h2 className="text-2xl font-semibold text-[#4D1895] sm:text-3xl">
+              Long-Term Goals
+            </h2>
+            <p className="text-lg font-medium text-slate-800 sm:text-xl">
+              Your Personal Goal-Setting Companion
+            </p>
+            <p className="text-sm leading-7 text-slate-600 sm:text-base">
+              Have a big dream but not sure where to start? Need to break it
+              into manageable milestones? HabitPal helps you define meaningful
+              long-term goals with clear 3-month, 6-month, and 12-month
+              checkpoints. Get a structured roadmap, track your progress, and
+              celebrate every milestone on the way to the top.
+            </p>
+          </div>
+        </div>
+      </section>
       <div className="mx-auto mt-10 max-w-3xl text-center">
         <p className="text-3xl font-semibold leading-tight text-[#4D1895] sm:text-4xl">
           What does{" "}
