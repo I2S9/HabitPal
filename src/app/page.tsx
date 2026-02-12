@@ -384,12 +384,10 @@ export default function Home() {
       <div className="w-full px-4 pb-2 sm:px-6 lg:px-8">
         <div className="mx-auto flex w-full max-w-6xl justify-center">
           <a
-            href="#"
+            href="https://testflight.apple.com/join/psnHRnpD"
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-full bg-[#4D1895] px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#3C1374] sm:px-8 sm:text-base"
-            onClick={(event) => {
-              event.preventDefault();
-              setIsComingSoonOpen(true);
-            }}
           >
             Turn big dreams into action
           </a>
