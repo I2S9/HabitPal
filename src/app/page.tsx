@@ -418,6 +418,54 @@ export default function Home() {
             </p>
           </div>
         </div>
+        <div className="mx-auto mt-16 flex w-full max-w-5xl flex-col items-center gap-8 md:flex-row-reverse md:gap-12">
+          <div className="w-full shrink-0 md:w-[45%]">
+            <img
+              src="/assets/daily-quest.jpg"
+              alt="Daily quest illustration"
+              className="h-auto w-full rounded-2xl"
+            />
+          </div>
+          <div className="flex flex-col gap-3">
+            <h2 className="text-2xl font-semibold text-[#4D1895] sm:text-3xl">
+              Daily Quests
+            </h2>
+            <p className="text-lg font-medium text-slate-800 sm:text-xl">
+              Turn Every Day Into a Small Adventure
+            </p>
+            <p className="text-sm leading-7 text-slate-600 sm:text-base">
+              Stay motivated with fun, bite-sized daily challenges tailored to
+              your habits. Each quest is designed to keep you engaged and moving
+              forward, one step at a time. Complete them to build momentum,
+              earn a sense of achievement, and make consistency feel rewarding
+              rather than repetitive.
+            </p>
+          </div>
+        </div>
+        <div className="mx-auto mt-16 flex w-full max-w-5xl flex-col items-center gap-8 md:flex-row md:gap-12">
+          <div className="w-full shrink-0 md:w-[45%]">
+            <img
+              src="/assets/to-do-list.jpg"
+              alt="To-do list illustration"
+              className="h-auto w-full rounded-2xl"
+            />
+          </div>
+          <div className="flex flex-col gap-3">
+            <h2 className="text-2xl font-semibold text-[#4D1895] sm:text-3xl">
+              To-Do List
+            </h2>
+            <p className="text-lg font-medium text-slate-800 sm:text-xl">
+              Your Daily Action Plan, Simplified
+            </p>
+            <p className="text-sm leading-7 text-slate-600 sm:text-base">
+              Keep your priorities clear with a focused to-do list built right
+              into your routine. Organize tasks, check them off as you go, and
+              feel the satisfaction of a productive day. Whether it&apos;s work,
+              personal goals, or self-care, HabitPal helps you stay on top of
+              what matters most.
+            </p>
+          </div>
+        </div>
       </section>
       <div className="mx-auto mt-10 max-w-3xl scroll-mt-28 text-center" id="features">
         <p className="text-3xl font-semibold leading-tight text-[#4D1895] sm:text-4xl">
