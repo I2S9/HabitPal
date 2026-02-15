@@ -800,7 +800,7 @@ export default function Home() {
           <div className="relative w-full max-w-md rounded-3xl bg-white px-10 py-12 text-center shadow-lg">
             <button
               type="button"
-              className="absolute right-6 top-4 text-slate-500 transition-colors hover:text-slate-700"
+              className="absolute right-6 top-4 cursor-pointer text-slate-500 transition-colors hover:text-slate-700"
               aria-label="Close"
               onClick={() => setIsComingSoonOpen(false)}
             >
